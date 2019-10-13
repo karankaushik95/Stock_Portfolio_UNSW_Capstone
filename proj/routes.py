@@ -1,10 +1,11 @@
 from flask import render_template
 from server import app
-import json, requests
+import json
+import requests
 
 
 @app.route('/')
-def test():
+def test_api():
     url = app.config["API_BASE_URL"] + "/AAPL/quote" + app.config["API_TOKEN"]
     data = requests.get(url)
     json_data = json.loads(data.text)
@@ -12,5 +13,5 @@ def test():
 
 
 @app.route('/index')
-def test_structure():
+def test_html():
     return render_template('index.html')
