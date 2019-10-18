@@ -3,6 +3,9 @@ const services = document.getElementById("Services");
 const home = document.getElementById("Home");
 const aboutScroll = document.getElementById("about-scroll").getBoundingClientRect();
 const servicesScroll = document.getElementById("services-scroll").getBoundingClientRect();
+const bigServices = document.getElementById("bigServices")
+const forgotPassword = document.getElementById("forgot_password");
+
 
 about.addEventListener("click", () => {
 
@@ -20,7 +23,6 @@ about.addEventListener("click", () => {
 
 services.addEventListener("click", () => {
 
-
     window.scrollTo({
         top: servicesScroll.top - 75,
         left: servicesScroll.left - 75,
@@ -30,6 +32,19 @@ services.addEventListener("click", () => {
     services.className = "nav-item active";
     home.className = "nav-item";
 });
+
+bigServices.addEventListener("click", ()=>{
+    
+    window.scrollTo({
+        top: servicesScroll.top - 75,
+        left: servicesScroll.left - 75,
+        behavior: 'smooth'
+    });
+    about.className = "nav-item";
+    services.className = "nav-item active";
+    home.className = "nav-item";
+});
+
 
 home.addEventListener("click", () => {
     window.scrollTo({
@@ -56,4 +71,115 @@ document.addEventListener("scroll", function (event) {
         services.className = "nav-item active";
         home.className = "nav-item";
     }
-})
+});
+
+
+forgotPassword.addEventListener("click", ()=>{
+    document.getElementsByClassName("modal-backdrop fade show")[0].remove(); // Remove the backdrop that wasn't being removed with just the below line
+    $("#modalRequest").toggle();
+});
+
+document.getElementById("loginButton").addEventListener("click", function(event){
+
+    event.preventDefault();
+
+});
+
+document.getElementById("forgotPassSubmit").addEventListener("click", function(event){
+
+    event.preventDefault();
+    const forgotPasswordText = document.getElementById("forgotpwdemail");
+    const forgotPasswordSpan = document.getElementById("forgot_pwd_email_error");
+    forgotPasswordSpan.style.color = "red";
+    if(!forgotPasswordText.value.trim()){
+        forgotPasswordSpan.innerText = "Email cannot be empty";
+        forgotPasswordText.focus();
+        forgotPasswordText.style.borderColor="red";
+        return;
+    }
+    else{
+        if (forgotPasswordText.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+            forgotPasswordSpan.innerText = "";
+            forgotPasswordText.style.borderColor="";
+        }else{
+            forgotPasswordSpan.innerText = "Please enter a valid email";
+            forgotPasswordText.focus();
+            forgotPasswordText.style.borderColor="red";
+        }
+    }
+});
+
+document.getElementById("loginButton").addEventListener("click", function(event){
+
+    event.preventDefault();
+    const username = document.getElementById("username");
+    const usernameSpan = document.getElementById("username_error");
+    
+    const password = document.getElementById("password");
+    const passwordSpan = document.getElementById("password_error");
+    passwordSpan.style.color = "red";
+    usernameSpan.style.color = "red";
+
+    if(!password.value.trim()){
+        passwordSpan.innerText = "Please enter your password";
+        password.focus();
+        password.style.borderColor="red";
+    }else{
+        password.style.borderColor="";
+        passwordSpan.innerText = "";
+    }
+    if(!username.value.trim()){
+        username.style.borderColor="red";
+        username.focus();
+        usernameSpan.innerText ="Please enter a username";
+    }else{
+        usernameSpan.innerText ="";
+        username.style.borderColor="";
+    }
+    if(username.value && password.value){
+        //call API
+        alert("Valid");
+    }
+});
+
+document.getElementById("registerButton").addEventListener("click", function(event){
+    event.preventDefault();
+    const fullName = document.getElementById("registerName");
+    const fullNameError = document.getElementById("register_name_error");
+
+    const username = document.getElementById("registerUsername");
+    const usernameError = document.getElementById("register_username_error");
+
+    const password = document.getElementById("registerPassword");
+    const passwordError = document.getElementById("register_password_error");
+
+    if(!password.value.trim()){
+        passwordError.innerText = "Please enter a password";
+        password.focus();
+        password.style.borderColor="red";
+    }else{
+        password.style.borderColor="";
+        passwordError.innerText = "";
+    }
+    if(!username.value.trim()){
+        username.style.borderColor="red";
+        username.focus();
+        usernameError.innerText ="Please enter a username";
+    }else{
+        usernameError.innerText ="";
+        username.style.borderColor="";
+    }
+    if(!fullName.value.trim()){
+        fullName.style.borderColor="red";
+        fullName.focus();
+        fullNameError.innerText ="Please enter your name";
+    }else{
+        fullNameError.innerText ="";
+        fullName.style.borderColor="";
+    }
+
+    if(username.value && fullName.value && password.value){
+        alert("valid");
+    }
+
+});
