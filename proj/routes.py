@@ -6,7 +6,7 @@ import requests
 
 @app.route('/')
 def test_api():
-    url = app.config["API_BASE_URL"] + "/AAPL/quote" + app.config["API_TOKEN"]
+    url = app.config["IEX_SANDBOX_URL"] + "/AAPL/quote" + app.config["IEX_SANDBOX_TOKEN"]
     data = requests.get(url)
     json_data = json.loads(data.text)
     return json.dumps(json_data)
@@ -15,3 +15,11 @@ def test_api():
 @app.route('/index')
 def test_html():
     return render_template('index.html')
+
+
+@app.route('/test')
+def test_symbols():
+    url = app.config["IEX_CLOUD_URL"] + "/ref-data/symbols" + app.config["IEX_CLOUD_TOKEN"]
+    data = requests.get(url)
+    json_data = json.loads(data.text)
+    return json.dumps(json_data)
