@@ -5,17 +5,15 @@ import json
 
 
 def bootstrap():
-    if not path.exists('tickers.db'):
-        print("here")
-        bootstrap_tickers_db()
-        populate_tickers_db()
+    # create_tickers_db()
+    # populate_tickers_table()
 
-    if not path.exists('stock.db'):
-        bootstrap_stock_db()
-        populate_stock_db()
+    # create_stock_db()
+    # populate_stock_static_table()
+    populate_stock_volatile_table()
 
 
-def bootstrap_tickers_db():
+def create_tickers_db():
     connection = sqlite3.connect('tickers.db')
     cursor = connection.cursor()
     sql_command = """ CREATE TABLE tickers(id INTEGER PRIMARY KEY, ticker VARCHAR(5), exchange VARCHAR(10),
@@ -25,7 +23,7 @@ def bootstrap_tickers_db():
     connection.close()
 
 
-def populate_tickers_db():
+def populate_tickers_table():
     connection = sqlite3.connect('tickers.db')
     cursor = connection.cursor()
     url = "https://cloud.iexapis.com/stable/ref-data/symbols?token=pk_6258cdb0c7c24d8ba34b1a1c2929e40d"
@@ -43,7 +41,7 @@ def populate_tickers_db():
     connection.close()
 
 
-def bootstrap_stock_db():
+def create_stock_db():
     connection = sqlite3.connect('stock.db')
     cursor = connection.cursor()
     sql_command = """ CREATE TABLE static (id INTEGER PRIMARY KEY, ticker VARCHAR(5), exchange VARCHAR(30), name VARCHAR(100),
@@ -61,7 +59,7 @@ def bootstrap_stock_db():
     connection.close()
 
 
-def populate_stock_db():
+def populate_stock_static_table():
     connection = sqlite3.connect('stock.db')
     cursor = connection.cursor()
     url = "https://cloud.iexapis.com/stable/ref-data/symbols?token=pk_6258cdb0c7c24d8ba34b1a1c2929e40d"
@@ -73,7 +71,6 @@ def populate_stock_db():
         url_n = url.format(symbol['symbol'])
         quote = requests.get(url_n)
         json_quote = json.loads(quote.text)
-        print(json_quote)
         sql_command = """ INSERT INTO static (id, ticker, exchange, name, type, region, description, industry,
                       sector, website, ceo, employees) VALUES ("{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}",
                       "{}", "{}", "{}", "{}");"""
@@ -81,6 +78,37 @@ def populate_stock_db():
                                        json_quote['issueType'], json_quote['country'], 'blank',
                                        json_quote['industry'], json_quote['sector'], json_quote['website'],
                                        json_quote['CEO'], json_quote['employees'])
+
+        print(sql_query)
+        cursor.execute(sql_query)
+        i += 1
+
+    connection.commit()
+    connection.close()
+    print("Finished")
+
+
+def populate_stock_volatile_table():
+    connection = sqlite3.connect('stock.db')
+    cursor = connection.cursor()
+    url = "https://cloud.iexapis.com/stable/ref-data/symbols?token=pk_6258cdb0c7c24d8ba34b1a1c2929e40d"
+    data = requests.get(url)
+    json_data = json.loads(data.text)
+    i = 0
+    for symbol in json_data:
+        url = "https://cloud.iexapis.com/stable/stock/{}/quote?token=pk_6258cdb0c7c24d8ba34b1a1c2929e40d"
+        url_n = url.format(symbol['symbol'])
+        quote = requests.get(url_n)
+        json_quote = json.loads(quote.text)
+        print(json_quote)
+        sql_command = """ INSERT INTO volatile (id, ticker, open, close, high, low, latest, latest_source, change,
+                      change_percent, market_cap, high_y, low_y, ytd_change) VALUES ("{}", "{}", "{}", "{}", "{}", "{}",
+                      "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}");"""
+        sql_query = sql_command.format(i, json_quote['symbol'], json_quote['open'], json_quote['close'],
+                                       json_quote['high'], json_quote['low'], json_quote['latestPrice'],
+                                       json_quote['latestSource'], json_quote['change'], json_quote['changePercent'],
+                                       json_quote['marketCap'], json_quote['week52High'], json_quote['week52Low'],
+                                       json_quote['ytdChange'])
 
         print(sql_query)
         cursor.execute(sql_query)
