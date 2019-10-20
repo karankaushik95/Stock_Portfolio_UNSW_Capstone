@@ -8,4 +8,9 @@ export PROJ_CONFIG="config/application-dev.cfg"
 export FLASK_APP="proj/server.py"
 export FLASK_DEBUG=1
 
+case "$1" in
+    -c) rm db/*.db
+    ;;
+esac
+
 flask run
