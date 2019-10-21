@@ -1,0 +1,17 @@
+#!/bin/bash
+
+## RUN THIS SCRIPT FROM THE ROOT PROJECT DIRECTORY
+## UNCOMMENT THE LINE THAT MATCHES YOUR OPERATING SYSTEM
+
+rm -r sqlite
+
+##### LINUX #####
+wget https://www.sqlite.org/2019/sqlite-tools-linux-x86-3300000.zip -O sqlite3.zip
+
+##### MAC-OSX #####
+# wget https://www.sqlite.org/2019/sqlite-tools-osx-x86-3300000.zip -O sqlite3.zip
+
+unzip sqlite3.zip -d sqlite
+rm sqlite3.zip
+
+mkdir -p db
