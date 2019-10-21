@@ -1,0 +1,21 @@
+I didn't see the requirement to do the logging until now, so I will back-log the previous weeks of work and commit now (21/10/19)
+
+Week 1 (16/09/19)
+
+Initial research into the projects that were on offer, and the format of the proposal that was due. Of the available options for the project, I was intrgiued by project 6, and began to research further into that particular topic, gathering information on Yahoo Finance, Google Finance, and the various APIs that existed for serving financial data.
+
+Week 2 (23/09/19)
+
+Formed a group in the lab, and discussed the project that we all wanted to undertake. It was unanimously decided to do project 6. Began discussing how to serve the webpage, and we settled on using Flask to locally host the website, and connect our front-end to the back-end written in Python. We discussed how to render the front-end, and settled on HTML and CSS, as well as using JavaScript to assist. It was decided that I would be Scrum Master, and so we setup the Trello Boards. We were unable to start coding or start the proposal until we were confirmed that we could do project 6, so not much could be done yet.
+
+Week 3 (30/09/19)
+
+We got confirmation during this week that we were able to do project 6, and so we began dividing up the jobs for the proposal, and spent the week working on the proposal. I helped to complete the technical specifications, aim, and background for the proposal, in terms of the research that we had done before hand. I also helped to polish off the report and move it into a format that was aesthetically pleasing. I setup the Github Classroom link this week, as well as intialising the repository on Github. We began our breakdown of the epics on Trello, where I broke down my designated epics, Search Shares, and Trends & Analytics, into smaller, more accomplishable tasks. I also began research into APIs that we could use, and so far we have settled on IEX.
+
+Week 4 (07/10/19)
+
+After submitting the project proposal, I made the first commit to the repository that contained all of the starter code required to establish a Flask application, and serve a basic index.html file. Contained in the code that I pushed was the main.py, requirements.txt, and runlocal.sh files to allow for a seamless startup of the code. In subsequent days, I wrote a second run script for windows, to allow other group members to run the app locally, and added configuration files such as application-dev.cfg to the repository to allow us to store the sections of the url links used to call the API. I also created an app route to test the working of the IEX API, that we had settled on. I also created a folder on google drive to store any documentation such as the style guide, and our API keys list with their home page websites. The project proposal is also stored here. At the end of the week, I restructured the back-end, to allow for an easy separation of modules, and work, and prepare for us to develop said modules. It was also at this time that I researched the usage of local SQL databases, and settled on using SQLite3 for our local database, to store information from the API locally. I added some setup functionality to allow us to use the local database, however this needed much more work before it was ready to be used properly. I had some issues with the initial setup of the local database, to do mainly with table structure, and string delimiting, but all were resolved eventually.
+
+Week 5 (14/10/19)
+
+This week, I finished the setup of the SQL tables, and wrote the python files necessary to make the API call and populate the local database files, which took about 5 hours to complete. One thing I noticed in the process was that we will need to use a multitude of APIs in order to get complete information spanning most prominent exchanges, a problem to be tackled once we have the app set up better. The main task to work on in the coming weeks is to develop the search module, and the helper functions required for it to perform. Some thinking must be done on how to query effectively, and whether we show options as you search. Currently, we have plenty enough data to test with, we just need to come together and connect the front-end and back-end and improve the flow of data between the two.
