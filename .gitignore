@@ -2,5 +2,5 @@ env/
 __pycache__/
 .vscode/
 sqlite/
-/utils
+/utils/runlocal.ps1
 dbhold/

@@ -1,0 +1,23 @@
+Week 1 (16/09/19)
+
+Initial research into the available projects. A few looked interesting but topic 6 was my preferred choice.
+
+Week 2 (23/09/19)
+
+Formed a group in the lab and discussed what projects were interesting to us. We decided on doing project 6.
+
+Week 3 (30/09/19)
+
+We successfully got given project 6 and spent the week drafting the proposal together dividing up sections of it among ourselves
+
+Week 4 (07/10/19)
+
+Spent some time debugging flask for Windows because there were some issues to get it working. We decided to use a bootstrap template and modify it for our website. We divided the roles among ourselves and I decided to work on the front end. So after discussion with my groupmates, I got a good looking template and began editing it for our needs
+
+Week 5 (14/10/19)
+
+Changed up the template to fit our needs except the Lorem Ipsum text that came with it. Added input validation, and event listeners for everything including scrolls and polished up the template to look even neater.
+
+Week 6 (21/10/19)
+
+
