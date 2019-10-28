@@ -7,10 +7,7 @@
   <title>Dashboard</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/materialdesignicons.css') }}">
-  <!-- endinject -->
-  <!-- vendor css for this page -->
-  <!-- End vendor css for this page -->
-  <!-- inject:css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/shared/style.css') }}">
   <!-- endinject -->
   <!-- Layout style -->
@@ -199,8 +196,10 @@
           </a>
         </li>
         <li>
-          <a href="pages/charts/chartjs.html">
-            <span class="link-title">Buy/Sell Shares</span>
+          <a href="#">
+            <span class="link-title" data-toggle="popover" data-placement="right" title="Work in Progress"
+              data-content="This section is still being built by our awesome engineers! Please check back soon!">Buy/Sell
+              Shares</span>
             <i class="mdi mdi-chart-donut link-icon"></i>
           </a>
         </li>
@@ -656,6 +655,10 @@
       console.log("clicked");
       $("#dashboard_heading").load('dashboard.html');
     }
+
+    $(document).ready(function(){ 
+        $('[data-toggle="popover"]').popover();    
+    }); 
   </script>
   <!--page body ends -->
   <!-- SCRIPT LOADING START FORM HERE /////////////-->
@@ -671,6 +674,8 @@
   <!-- build:js -->
   <script src="{{ url_for('static', filename='js/template.js') }}"></script>
   <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <!-- endbuild -->
 </body>
 
