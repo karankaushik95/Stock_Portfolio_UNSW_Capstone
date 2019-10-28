@@ -20,4 +20,5 @@ Changed up the template to fit our needs except the Lorem Ipsum text that came w
 
 Week 6 (21/10/19)
 
+Fixed up template for dashboard, added a pullover, and discussed further options for dashboards looks with team. Focusing on polishing off dashboard main UI this week.
 
