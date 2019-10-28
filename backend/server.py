@@ -1,6 +1,6 @@
 from flask import Flask
 
-app = Flask(__name__, template_folder='../templates')
+app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
 app.config.from_envvar('PROJ_CONFIG')
 
 from setup import bootstrap
