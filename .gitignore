@@ -4,3 +4,4 @@ __pycache__/
 sqlite/
 /utils/runlocal.ps1
 dbhold/
+/backend/*.pyc
