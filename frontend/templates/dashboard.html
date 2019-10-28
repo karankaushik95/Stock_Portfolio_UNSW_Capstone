@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dashboard</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="./vendors/iconfonts/mdi/css/materialdesignicons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/materialdesignicons.css') }}">
     <!-- endinject -->
     <!-- vendor css for this page -->
     <!-- End vendor css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="./css/shared/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shared/style.css') }}">
     <!-- endinject -->
     <!-- Layout style -->
-    <link rel="stylesheet" href="./css/demo_1/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/demo_1/style.css') }}">
     <!-- Layout style -->
-    <link rel="shortcut icon" href="./images/favicon.ico" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='/images/favicon.ico') }}" />
   </head>
   <body class="header-fixed">
     <!-- partial:partials/_header.html -->
     <nav class="t-header">
       <div class="t-header-brand-wrapper">
         <a href="index.html">
-          <img class="logo" src="./images/logo.svg" alt="">
-          <img class="logo-mini" src="./images/logo_mini.svg" alt="">
+          <img class="logo" src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+          <img class="logo-mini" src="{{ url_for('static', filename='images/logo_mini.svg') }}" alt="">
         </a>
       </div>
       <div class="t-header-content-wrapper">
@@ -94,7 +94,7 @@
                 <div class="dropdown-body">
                   <div class="dropdown-list">
                     <div class="image-wrapper">
-                      <img class="profile-img" src="./images/profile/male/image_1.png" alt="profile image">
+                      <img class="profile-img" src="{{ url_for('static', filename='images/profile/male/image_1.png') }}" alt="profile image">
                       <div class="status-indicator rounded-indicator bg-success"></div>
                     </div>
                     <div class="content-wrapper">
@@ -104,7 +104,7 @@
                   </div>
                   <div class="dropdown-list">
                     <div class="image-wrapper">
-                      <img class="profile-img" src="./images/profile/female/image_2.png" alt="profile image">
+                      <img class="profile-img" src="{{ url_for('static', filename='images/profile/female/image_2.png') }}" alt="profile image">
                       <div class="status-indicator rounded-indicator bg-success"></div>
                     </div>
                     <div class="content-wrapper">
@@ -114,7 +114,7 @@
                   </div>
                   <div class="dropdown-list">
                     <div class="image-wrapper">
-                      <img class="profile-img" src="./images/profile/male/image_3.png" alt="profile image">
+                      <img class="profile-img" src="{{ url_for('static', filename='images/profile/male/image_3.png') }}" alt="profile image">
                       <div class="status-indicator rounded-indicator bg-warning"></div>
                     </div>
                     <div class="content-wrapper">
@@ -170,7 +170,7 @@
       <div class="sidebar">
         <div class="user-profile">
           <div class="display-avatar animated-avatar">
-            <img class="profile-img img-lg rounded-circle" src="./images/profile/male/image_1.png" alt="profile image">
+            <img class="profile-img img-lg rounded-circle" src="{{ url_for('static', filename='images/profile/male/image_1.png') }}" alt="profile image">
           </div>
           <div class="info-wrapper">
             <p class="user-name">Allen Clerk</p>
@@ -284,7 +284,7 @@
                     <div class="wrapper">
                       <div class="d-flex justify-content-between">
                         <div class="split-header">
-                          <img class="img-ss mt-1 mb-1 mr-2" src="./images/social-icons/instagram.svg" alt="instagram">
+                          <img class="img-ss mt-1 mb-1 mr-2" src="{{ url_for('static', filename='images/social-icons/instagram.svg') }}" alt="instagram">
                           <p class="card-title">Followers Growth</p>
                         </div>
                         <div class="wrapper">
@@ -469,7 +469,7 @@
                       <tbody>
                         <tr>
                           <td class="pr-0 pl-4">
-                            <img class="profile-img img-sm" src="./images/profile/male/image_4.png" alt="profile image">
+                            <img class="profile-img img-sm" src="{{ url_for('static', filename='images/profile/male/image_4.png') }}" alt="profile image">
                           </td>
                           <td class="pl-md-0">
                             <small class="text-black font-weight-medium d-block">Barbara Curtis</small>
@@ -483,7 +483,7 @@
                         </tr>
                         <tr>
                           <td class="pr-0 pl-4">
-                            <img class="profile-img img-sm" src="./images/profile/male/image_3.png" alt="profile image">
+                            <img class="profile-img img-sm" src="{{ url_for('static', filename='images/profile/male/image_3.png') }}" alt="profile image">
                           </td>
                           <td class="pl-md-0">
                             <small class="text-black font-weight-medium d-block">Charlie Hawkins</small>
@@ -497,7 +497,7 @@
                         </tr>
                         <tr>
                           <td class="pr-0 pl-4">
-                            <img class="profile-img img-sm" src="./images/profile/female/image_2.png" alt="profile image">
+                            <img class="profile-img img-sm" src="{{ url_for('static', filename='images/profile/female/image_2.png') }}" alt="profile image">
                           </td>
                           <td class="pl-md-0">
                             <small class="text-black font-weight-medium d-block">Nina Bates</small>
@@ -511,7 +511,7 @@
                         </tr>
                         <tr>
                           <td class="pr-0 pl-4">
-                            <img class="profile-img img-sm" src="./images/profile/male/image_10.png" alt="profile image">
+                            <img class="profile-img img-sm" src="{{ url_for('static', filename='images/profile/male/image_10.png') }}" alt="profile image">
                           </td>
                           <td class="pl-md-0">
                             <small class="text-black font-weight-medium d-block">Hester Richards</small>
@@ -556,10 +556,10 @@
                         <div class="activity-log">
                           <p class="log-name">Ronald Edwards</p>
                           <div class="log-details">Report has been updated <div class="grouped-images mt-2">
-                              <img class="img-sm" src="./images/profile/male/image_4.png" alt="Profile Image" data-toggle="tooltip" title="Gerald Pierce">
-                              <img class="img-sm" src="./images/profile/male/image_5.png" alt="Profile Image" data-toggle="tooltip" title="Edward Wilson">
-                              <img class="img-sm" src="./images/profile/female/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Billy Williams">
-                              <img class="img-sm" src="./images/profile/male/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Lelia Hampton">
+                              <img class="img-sm" src="{{ url_for('static', filename='images/profile/male/image_4.png') }}" alt="Profile Image" data-toggle="tooltip" title="Gerald Pierce">
+                              <img class="img-sm" src="{{ url_for('static', filename='images/profile/male/image_5.png') }}" alt="Profile Image" data-toggle="tooltip" title="Edward Wilson">
+                              <img class="img-sm" src="{{ url_for('static', filename='images/profile/female/image_6.png') }}" alt="Profile Image" data-toggle="tooltip" title="Billy Williams">
+                              <img class="img-sm" src="{{ url_for('static', filename='images/profile/male/image_6.png') }}" alt="Profile Image" data-toggle="tooltip" title="Lelia Hampton">
                               <span class="plus-text img-sm">+3</span>
                             </div>
                           </div>
@@ -618,17 +618,17 @@
     <!--page body ends -->
     <!-- SCRIPT LOADING START FORM HERE /////////////-->
     <!-- plugins:js -->
-    <script src="./vendors/js/core.js"></script>
+    <script src="{{ url_for('static', filename='vendors/js/core.js') }}"></script>
     <!-- endinject -->
     <!-- Vendor Js For This Page Ends-->
-    <script src="./vendors/apexcharts/apexcharts.min.js"></script>
-    <script src="./vendors/chartjs/Chart.min.js"></script>
-    <script src="./js/charts/chartjs.addon.js"></script>
-    <script src="./js/profile.js"></script>
+    <script src="{{ url_for('static', filename='vendors/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/chartjs/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/charts/chartjs.addon.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
     <!-- Vendor Js For This Page Ends-->
     <!-- build:js -->
-    <script src="./js/template.js"></script>
-    <script src="./js/dashboard.js"></script>
+    <script src="{{ url_for('static', filename='js/template.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
     <!-- endbuild -->
   </body>
 </html>

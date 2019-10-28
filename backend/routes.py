@@ -56,6 +56,10 @@ def team():
 def work():
     return render_template('work.html')
 
+@app.route('/dashboard.html')
+def dashboard():
+    return render_template('dashboard.html')
+
 
 @app.route('/security/<ticker>.html')
 def security_info(ticker):
