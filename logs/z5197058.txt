@@ -19,3 +19,7 @@ After submitting the project proposal, I made the first commit to the repository
 Week 5 (14/10/19)
 
 This week, I finished the setup of the SQL tables, and wrote the python files necessary to make the API call and populate the local database files, which took about 5 hours to complete. One thing I noticed in the process was that we will need to use a multitude of APIs in order to get complete information spanning most prominent exchanges, a problem to be tackled once we have the app set up better. The main task to work on in the coming weeks is to develop the search module, and the helper functions required for it to perform. Some thinking must be done on how to query effectively, and whether we show options as you search. Currently, we have plenty enough data to test with, we just need to come together and connect the front-end and back-end and improve the flow of data between the two.
+
+Week 6 (21/10/19)
+
+I connected our front-end to our back-end and ensured that the correct files were being served when you clicked on the links. I also began work on the web scraper.
