@@ -6,6 +6,10 @@ const servicesScroll = document.getElementById("services-scroll").getBoundingCli
 const bigServices = document.getElementById("bigServices")
 const forgotPassword = document.getElementById("forgot_password");
 
+const brokenbutton = document.getElementById("broken_button");
+
+brokenbutton.style.
+
 
 about.addEventListener("click", () => {
 

@@ -9463,7 +9463,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 .btn.btn-primary:hover {
   border: 1px solid #2f89fc;
   background: transparent;
-  color: #2f89fc;
+  color: var(--reddit-blue);
 }
 
 .btn.btn-primary.btn-outline-primary {
