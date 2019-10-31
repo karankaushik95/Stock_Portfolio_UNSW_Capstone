@@ -212,8 +212,8 @@
           </a>
         </li>
         <li>
-          <a href="pages/icons/material-icons.html">
-            <span class="link-title">Logout</span>
+          <a href="#">
+            <span class="link-title" id="Logout">Logout</span>
             <i class="mdi mdi-flower-tulip-outline link-icon"></i>
           </a>
         </li>
@@ -654,7 +654,6 @@
   </div>
   <script>
     function load() {
-      console.log("clicked");
       $("#dashboard_heading").load('dashboard.html');
     }
 
@@ -676,6 +675,7 @@
   <!-- build:js -->
   <script src="{{ url_for('static', filename='js/template.js') }}"></script>
   <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dashboard_byteme.js') }}"></script>
   <!-- endbuild -->
 </body>
 
