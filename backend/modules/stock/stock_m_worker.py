@@ -1,10 +1,10 @@
 from decimal import Decimal
-from modules.share.share_s_worker import shareSWorker
+from modules.stock.stock_s_worker import stockSWorker
 import json
 import datetime
 
 
-class shareMWorker():
+class stockMWorker():
 
     @staticmethod
     def remove_keys_iex(json_data):
@@ -50,7 +50,7 @@ class shareMWorker():
 
     @staticmethod
     def av_daily_range(json_data, ticker):
-        day_series = shareSWorker.av_time_series(ticker, '5min', 'INTRADAY', True)
+        day_series = stockSWorker.av_time_series(ticker, '5min', 'INTRADAY', True)
         time_series = day_series["Time Series (5min)"]
         today = datetime.date.today()
         counter = 0

@@ -3,7 +3,7 @@ import json
 import requests
 
 
-class shareSWorker():
+class stockSWorker():
 
     @staticmethod
     def av_quote(ticker):
