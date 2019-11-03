@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for
 from server import app
 from modules.stock.stock_m_worker import stockMWorker
 from modules.stock.stock_s_worker import stockSWorker
+from modules.search.search_s_worker import searchSWorker
 import json
 import requests
 
@@ -122,6 +123,16 @@ def market_info(mticker):
         quotes[index] = (json_data)
 
     return json.dumps(quotes)
+
+
+# PRODUCES THE SEARCH RESULTS, MIGHT NOT NEED TO BE ITS OWN ROUTE BUT HEY
+@app.route('/search.html', methods=['GET', 'POST'])
+def security():
+    if request.method == 'POST':
+        search = request.form['search']
+        json_data = searchSWorker.av_search_string(search)
+        return json.dumps(json_data)
+    return render_template('search.html')
 
 
 @app.route('/test')
