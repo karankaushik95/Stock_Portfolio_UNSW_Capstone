@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from server import app
-from modules.share.share_m_worker import shareMWorker
-from modules.share.share_s_worker import shareSWorker
+from modules.stock.stock_m_worker import stockMWorker
+from modules.stock.stock_s_worker import stockSWorker
 import json
 import requests
 
@@ -67,11 +67,11 @@ def dashboard():
 # SHARE PROFILE ROUTE NO HTML YET
 # USES APLHAVANTAGE
 # THE INTERVAL SHOULD BE SETTABLE ON THE PAGE
-# SAME WITH TYPE OF SERIES, (ADJUSTED?NOT ADJUSTED) AND TIME FRAME
-@app.route('/security/<ticker>.html')
-def security_info(ticker):
-    quote_data = shareSWorker.av_quote(ticker)
-    shareMWorker.av_tidy_quote(quote_data)
+# SAME WITH TYPE OF SERIES, (ADJUSTED/NOT ADJUSTED) AND TIME FRAME
+@app.route('/stock/<ticker>.html')
+def stock_info(ticker):
+    quote_data = stockSWorker.av_quote(ticker)
+    stockMWorker.av_tidy_quote(quote_data)
 
     # ---- THESE FUNCTIONS MAKE THE LOADING QUITE SLOW ---- NEED TO OPTIMISE SOMEHOW
     # shareMWorker.av_market_cap(quote_data)
@@ -81,17 +81,47 @@ def security_info(ticker):
     interval = '60min'
     series = 'DAILY'
     adj_flag = True
-    time_series = shareSWorker.av_time_series(ticker, interval, series, adj_flag)
-    json_data = shareMWorker.av_create_json(quote_data, time_series)
+    time_series = stockSWorker.av_time_series(ticker, interval, series, adj_flag)
+    json_data = stockMWorker.av_create_json(quote_data, time_series)
     return json.dumps(json_data)
 
 
-@app.route('/security.html', methods=['GET', 'POST'])
-def security():
-    if request.method == 'POST':
-        ticker = request.form['ticker']
-        return redirect(url_for('security_info', ticker=ticker))
-    return render_template('security.html')
+# SHARE PROFILE ROUTE NO HTML YET
+# USES APLHAVANTAGE
+# THE INTERVAL SHOULD BE SETTABLE ON THE PAGE
+# SAME WITH TYPE OF SERIES, (ADJUSTED/NOT ADJUSTED) AND TIME FRAME
+@app.route('/market/<mticker>.html')
+def market_info(mticker):
+    indices = []
+
+    # WE CAN ADD MORE INDICES BUT IT MAKES THE LOADING VERY SLOW
+    # NEED TO INVESTIGATE MULTIPROCESSING
+    # NEEDS ERROR CHECKING AS WELL
+    if mticker == 'NASDAQ':
+        indices = ['INX']
+    elif mticker == 'NYSE':
+        indices = ['NYA']
+    else:
+        redirect(url_for(error))
+
+    quotes = {}
+    for index in indices:
+        quote_data = stockSWorker.av_quote(index)
+        stockMWorker.av_tidy_quote(quote_data)
+
+        # ---- THESE FUNCTIONS MAKE THE LOADING QUITE SLOW ---- NEED TO OPTIMISE SOMEHOW
+        # shareMWorker.av_market_cap(quote_data)
+        # shareMWorker.av_daily_range(quote_data, ticker)
+        # shareMWorker.av_52_high_low(quote_data, ticker)
+
+        interval = '60min'
+        series = 'DAILY'
+        adj_flag = True
+        time_series = stockSWorker.av_time_series(index, interval, series, adj_flag)
+        json_data = stockMWorker.av_create_json(quote_data, time_series)
+        quotes[index] = (json_data)
+
+    return json.dumps(quotes)
 
 
 @app.route('/test')
@@ -100,3 +130,8 @@ def test_symbols():
     data = requests.get(url)
     json_data = json.loads(data.text)
     return json.dumps(json_data)
+
+
+@app.route('/error')
+def error():
+    return "404"
