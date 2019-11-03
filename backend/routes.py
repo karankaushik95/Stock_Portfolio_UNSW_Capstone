@@ -1,5 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from server import app
+from modules.share.share_m_worker import shareMWorker
+from modules.share.share_s_worker import shareSWorker
 import json
 import requests
 
@@ -56,18 +58,31 @@ def team():
 def work():
     return render_template('work.html')
 
+
 @app.route('/dashboard.html')
 def dashboard():
     return render_template('dashboard.html')
 
 
+# SHARE PROFILE ROUTE NO HTML YET
+# USES APLHAVANTAGE
+# THE INTERVAL SHOULD BE SETTABLE ON THE PAGE
+# SAME WITH TYPE OF SERIES, (ADJUSTED?NOT ADJUSTED) AND TIME FRAME
 @app.route('/security/<ticker>.html')
 def security_info(ticker):
-    url = app.config["IEX_CLOUD_URL"] + "stock/{}/quote" + app.config["IEX_CLOUD_TOKEN"]
-    url = url.format(ticker)
-    print(url)
-    data = requests.get(url)
-    json_data = json.loads(data.text)
+    quote_data = shareSWorker.av_quote(ticker)
+    shareMWorker.av_tidy_quote(quote_data)
+
+    # ---- THESE FUNCTIONS MAKE THE LOADING QUITE SLOW ---- NEED TO OPTIMISE SOMEHOW
+    # shareMWorker.av_market_cap(quote_data)
+    # shareMWorker.av_daily_range(quote_data, ticker)
+    # shareMWorker.av_52_high_low(quote_data, ticker)
+
+    interval = '60min'
+    series = 'DAILY'
+    adj_flag = True
+    time_series = shareSWorker.av_time_series(ticker, interval, series, adj_flag)
+    json_data = shareMWorker.av_create_json(quote_data, time_series)
     return json.dumps(json_data)
 
 
