@@ -1,3 +1,7 @@
+Week 1
+
+We read through the projects to determine what would be our top preferences. The group was fairly unanimous so this was a smooth process. The only challenge is waiting until we find out what project we can do and working immediately.
+
 Week 2
 
 We decided on our project this week. We also began background research as to what API's we wanted to use. Also looked at existing portfolio management systems in order to get an idea of how we wanted to setup our website.
@@ -17,3 +21,11 @@ Adjusted the login service so that it uses the database. Now when a user is crea
 Week 6
 
 Began using the flask login module in order to validate users. This means we could use @login_required to ensure users cannot bypass the login system. The main obstacle was deciding how to store user information and parse this to the login module, as we stored user data in the database rather than a detailed user object. I decided to create a user object that contains the user's email as the unique identifier that can be used to access the database.
+
+Week 7
+
+This was a lighter week for me, I mostly tried to understand the front end code and how it links to the routes. Due to other assessments I didn't write much code in this week, but now have a better grasp of how the front end links to the backend.
+
+Week 8
+
+Adapted the login service to the front end. Initially it was set up such that the login and signup forms were on their own html page, however now they are forms accessible from the dashboard. As I am unfamiliar with html and writing corresponding wrotes this required assistance from other members in the group.
