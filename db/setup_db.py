@@ -10,8 +10,31 @@ def bootstrap():
 
     # create_stock_db()
     # populate_stock_static_table()
-    populate_stock_volatile_table()
+    # populate_stock_volatile_table()
+        
+    if not path.exists('users.db'):
+        bootstrap_users_db()
+        populate_users_db()
 
+def bootstrap_users_db():
+    connection = sqlite3.connect('users.db')
+    cursor = connection.cursor()
+    sql_command = """ CREATE TABLE users(email, password);"""
+    cursor.execute(sql_command)
+    connection.commit()
+    connection.close()
+    
+def populate_users_db():
+    connection = sqlite3.connect('users.db')
+    cursor = connection.cursor()
+    with open('users.csv', mode = 'r') as users:
+            reader = csv.reader(users)
+            for row in reader:
+                sql = """ INSERT INTO users (email, password) VALUES ("{}", "{}");"""
+                query = sql.format(row[0], row[1])
+                cursor.execute(query)
+    connection.commit()
+    connection.close()
 
 def create_tickers_db():
     connection = sqlite3.connect('tickers.db')
