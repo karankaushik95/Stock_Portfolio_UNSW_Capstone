@@ -6,11 +6,18 @@ const servicesScroll = document.getElementById("services-scroll").getBoundingCli
 const bigServices = document.getElementById("bigServices")
 const forgotPassword = document.getElementById("forgot_password");
 
-const brokenbutton = document.getElementById("broken_button");
+const register_big_button = document.getElementById("register_big_button");
 
-brokenbutton.style.
+register_big_button.addEventListener("mouseleave", function(event){
+    event.target.backgroundColor = "#0079D3";
+    event.target.style.color = "white";
+});
 
-
+register_big_button.addEventListener("mouseenter", ()=>{
+    event.target.style.backgroundColor = "white";
+    event.target.style.color = "#0079D3";
+});
+  
 about.addEventListener("click", () => {
 
 

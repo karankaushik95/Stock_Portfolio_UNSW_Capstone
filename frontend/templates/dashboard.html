@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/demo_1/style.css') }}">
   <!-- Layout style -->
   <link rel="shortcut icon" href="{{ url_for('static', filename='/images/favicon.ico') }}" />
+  <link href="//cdn.muicss.com/mui-0.10.0/css/mui.min.css" rel="stylesheet" type="text/css" />
+  <script src="//cdn.muicss.com/mui-0.10.0/js/mui.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
@@ -35,8 +37,8 @@
         <form action="#" class="t-header-search-box">
           <div class="input-group">
             <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" autocomplete="off">
-            <button class="btn btn-primary" id="search_button" type="submit"><i
-                class="mdi mdi-arrow-right-thick"></i></button>
+            <button class="btn btn-primary" id="search_button" type="submit"><i class="mdi mdi-arrow-right-thick"
+                id="thati"></i></button>
           </div>
         </form>
         <ul class="nav ml-auto">
@@ -199,7 +201,7 @@
         </li>
         <li>
           <a href="#" style="text-decoration: none;">
-            <span class="link-title" data-toggle="popover" data-placement="right" title="Work in Progress" 
+            <span class="link-title" data-toggle="popover" data-placement="right" title="Work in Progress"
               data-content="This section is still being built by our awesome engineers! Please check back soon!">Buy/Sell
               Shares</span>
             <i class="mdi mdi-chart-donut link-icon"></i>
@@ -657,9 +659,9 @@
       $("#dashboard_heading").load('dashboard.html');
     }
 
-    $(document).ready(function(){ 
-        $('[data-toggle="popover"]').popover();    
-    }); 
+    $(document).ready(function () {
+      $('[data-toggle="popover"]').popover();
+    });
   </script>
   <!--page body ends -->
   <!-- SCRIPT LOADING START FORM HERE /////////////-->

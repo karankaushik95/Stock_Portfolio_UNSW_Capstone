@@ -22,3 +22,9 @@ Week 6 (21/10/19)
 
 Fixed up template for dashboard, added a pullover, and discussed further options for dashboards looks with team. Focusing on polishing off dashboard main UI this week.
 
+Week 7 (28/10/19)
+
+Finished logout, added a WIP for Buy/Sell shares, finished search, added hyperlinks in search for showing stock profiles, added some UI for stock profiles. Fixed up some endpoint issues in the API.
+
+Week 8 (05/10/19)
+

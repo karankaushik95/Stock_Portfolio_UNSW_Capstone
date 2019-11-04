@@ -69,7 +69,7 @@ def dashboard():
 # USES APLHAVANTAGE
 # THE INTERVAL SHOULD BE SETTABLE ON THE PAGE
 # SAME WITH TYPE OF SERIES, (ADJUSTED/NOT ADJUSTED) AND TIME FRAME
-@app.route('/stock/<ticker>.html')
+@app.route('/stock/<ticker>')
 def stock_info(ticker):
     quote_data = stockSWorker.av_quote(ticker)
     stockMWorker.av_tidy_quote(quote_data)
@@ -91,7 +91,7 @@ def stock_info(ticker):
 # USES APLHAVANTAGE
 # THE INTERVAL SHOULD BE SETTABLE ON THE PAGE
 # SAME WITH TYPE OF SERIES, (ADJUSTED/NOT ADJUSTED) AND TIME FRAME
-@app.route('/market/<mticker>.html')
+@app.route('/market/<mticker>')
 def market_info(mticker):
     indices = []
 
@@ -126,13 +126,13 @@ def market_info(mticker):
 
 
 # PRODUCES THE SEARCH RESULTS, MIGHT NOT NEED TO BE ITS OWN ROUTE BUT HEY
-@app.route('/search.html', methods=['GET', 'POST'])
+@app.route('/search', methods=['GET', 'POST'])
 def security():
     if request.method == 'POST':
         search = request.form['search']
         json_data = searchSWorker.av_search_string(search)
         return json.dumps(json_data)
-    return render_template('search.html')
+    return None
 
 
 @app.route('/test')
