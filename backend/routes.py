@@ -12,8 +12,12 @@ def test_api():
     return json.dumps(json_data)
 
 
-@app.route('/index.html')
+@app.route('/index.html', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST': 
+        print("hello")
+        username = request.form['username']
+        print(username)
     return render_template('index.html')
 
 
