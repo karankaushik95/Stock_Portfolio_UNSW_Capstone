@@ -1,5 +1,11 @@
 const apiUrl = "http://127.0.0.1:5000"
 
+// if (!sessionStorage.get("username")){
+//     window.location.href = "/index.html";
+// }
+
+
+
 function logout() {
     document.getElementById("Logout").addEventListener("click", function (event) {
         sessionStorage.clear();
@@ -135,8 +141,8 @@ function search() {
 
 
                 td1.addEventListener("mouseenter", function(event){
-                    td1.style.backgroundColor = "grey";
-                    td2.style.backgroundColor = "grey";
+                    td1.style.backgroundColor = "#e6e6e6";
+                    td2.style.backgroundColor = "#e6e6e6";
                 });
                 td1.addEventListener("mouseleave", function(event){
                     td1.style.backgroundColor = "";
@@ -144,8 +150,8 @@ function search() {
                 });
 
                 td2.addEventListener("mouseenter", function(event){
-                    td1.style.backgroundColor = "grey";
-                    td2.style.backgroundColor = "grey";
+                    td1.style.backgroundColor = "#e6e6e6";
+                    td2.style.backgroundColor = "#e6e6e6";
                 });
                 td2.addEventListener("mouseleave", function(event){
                     td1.style.backgroundColor = "";

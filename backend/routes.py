@@ -23,6 +23,13 @@ def index():
         print(username)
     return render_template('index.html')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST': 
+        username = request.form['username']
+        print(username)
+        return json.dumps(username)
+    return "404"
 
 @app.route('/about.html')
 def about():
@@ -150,3 +157,4 @@ def test_symbols():
 @app.route('/error')
 def error():
     return "404"
+
