@@ -1,4 +1,5 @@
 import sqlite3
+#from flask_login import login_manager
 
 class LoginService():
 
@@ -39,17 +40,21 @@ class LoginService():
         return False
 
     @staticmethod
-    def new_user(first_name, surname, email, password, phone_number, birthday):
+    def new_user(name, email, password):
         connection = sqlite3.connect('db/users.db')
         cursor = connection.cursor()
-        sql = """ INSERT INTO users VALUES ("{}", "{}", "{}", "{}", "{}", "{}");"""
-        query = sql.format(first_name, surname, email, password, phone_number, birthday)
+        sql = """ INSERT INTO users VALUES ("{}", "{}", "{}");"""
+        query = sql.format(name, email, password)
         cursor.execute(query)
         connection.commit()
         connection.close()
         
+    @staticmethod
     def load_user(self, user_id):
-        return User(user_id)
+        if (self.user_exists(user_id)):
+            return User(user_id)
+        else:
+            return None
     
 class User():
     
