@@ -3,6 +3,7 @@ from server import app
 from modules.stock.stock_m_worker import stockMWorker
 from modules.stock.stock_s_worker import stockSWorker
 from modules.search.search_s_worker import searchSWorker
+from service.login.login_service import LoginService, User
 import json
 import requests
 
@@ -25,10 +26,27 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form['username']
+        password = request.form['password']
+        if (LoginService.check(email,password)):
+            #login_user(LoginService.load_user(email))
+            return json.dumps({"success":"true"})
+        else:
+            return json.dumps({"success":"false"})
+    return "404"
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
     if request.method == 'POST': 
-        username = request.form['username']
-        print(username)
-        return json.dumps(username)
+        name = request.form['registerName']
+        email = request.form['registerUsername']
+        password = request.form['registerPassword']
+        if (LoginService.user_exists(email)):
+            return json.dumps({"success":"false"})
+        else:
+            LoginService.new_user(name, email, password)
+            return json.dumps({"success":"true"})
     return "404"
 
 @app.route('/about.html')
