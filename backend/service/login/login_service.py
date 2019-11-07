@@ -1,10 +1,12 @@
 import sqlite3
-#from flask_login import login_manager
+from flask_login import LoginManager, UserMixin
 
 class LoginService():
 
-    @staticmethod
-    def user_exists(email):
+    def __init__(self):
+        self.session_users = []
+    
+    def user_exists(self, email):
         connection = sqlite3.connect('db/users.db')
         cursor = connection.cursor()
         sql_command = """ SELECT email FROM users;"""
@@ -15,9 +17,11 @@ class LoginService():
             if email == existing_email[0]:
                 return True
         return False
+    
+    def login_session_user(self, user):
+        self.session_users.append(user)
 
-    @staticmethod
-    def check(email, password):
+    def check(self, email, password):
 
         connection = sqlite3.connect('db/users.db')
         cursor = connection.cursor()
@@ -39,8 +43,7 @@ class LoginService():
                     return True
         return False
 
-    @staticmethod
-    def new_user(name, email, password):
+    def new_user(self, name, email, password):
         connection = sqlite3.connect('db/users.db')
         cursor = connection.cursor()
         sql = """ INSERT INTO users VALUES ("{}", "{}", "{}");"""
@@ -49,14 +52,13 @@ class LoginService():
         connection.commit()
         connection.close()
         
-    @staticmethod
-    def load_user(self, user_id):
-        if (self.user_exists(user_id)):
-            return User(user_id)
-        else:
-            return None
+    def get_user(self, email):
+        for user in self.session_users:
+            if (user.email == email):
+                return user
+        return None
     
-class User():
+class User(UserMixin):
     
     def __init__(self, user_id):
         self.email = user_id
