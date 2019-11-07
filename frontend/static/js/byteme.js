@@ -1,3 +1,5 @@
+const apiUrl = "http://127.0.0.1:5000"
+
 const about = document.getElementById("About");
 const services = document.getElementById("Services");
 const home = document.getElementById("Home");
@@ -149,7 +151,21 @@ document.getElementById("loginButton").addEventListener("click", function (event
     }
     if (username.value && password.value) {
         //call API
-        alert("Valid");
+        let formData = new FormData();
+        formData.append("username", username.value);
+        formData.append("password", password.value);
+        
+        fetch(apiUrl+"/login", {
+            method: 'POST',
+            body: formData
+        }).then(resp => resp.json()).then(function (response) {
+            console.log(response);
+            if(response["success"] === "true"){
+                sessionStorage.setItem("username", username.value);
+                window.location.href = "/dashboard.html";
+            }
+        });
+        //alert("Valid");
     }
 });
 
@@ -198,6 +214,7 @@ document.getElementById("registerButton").addEventListener("click", function (ev
 
     if (username.value && fullName.value && password.value) {
         alert("valid");
+        // call register api
     }
 
 });

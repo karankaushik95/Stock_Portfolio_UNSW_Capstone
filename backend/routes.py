@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user 
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user 
 from server import app, login_service
 from modules.stock.stock_m_worker import stockMWorker
 from modules.stock.stock_s_worker import stockSWorker
@@ -32,7 +32,7 @@ def login():
             return json.dumps({"success":"true"})
         else:
             return json.dumps({"success":"false"})
-    return "404"
+    return render_template('error.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
