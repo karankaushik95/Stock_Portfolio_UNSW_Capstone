@@ -1,9 +1,10 @@
 from flask import render_template, request, redirect, url_for
-from server import app
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user 
+from server import app, login_service
 from modules.stock.stock_m_worker import stockMWorker
 from modules.stock.stock_s_worker import stockSWorker
 from modules.search.search_s_worker import searchSWorker
-from service.login.login_service import LoginService, User
+from service.login.login_service import User
 import json
 import requests
 
@@ -15,13 +16,8 @@ def test_api():
     json_data = json.loads(data.text)
     return json.dumps(json_data)
 
-
 @app.route('/index.html', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST': 
-        print("hello")
-        username = request.form['username']
-        print(username)
     return render_template('index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -29,8 +25,10 @@ def login():
     if request.method == 'POST':
         email = request.form['username']
         password = request.form['password']
-        if (LoginService.check(email,password)):
-            #login_user(LoginService.load_user(email))
+        if (login_service.check(email,password)):
+            user = User(email)
+            login_service.login_session_user(user)
+            login_user(user)
             return json.dumps({"success":"true"})
         else:
             return json.dumps({"success":"false"})
@@ -42,10 +40,10 @@ def signup():
         name = request.form['registerName']
         email = request.form['registerUsername']
         password = request.form['registerPassword']
-        if (LoginService.user_exists(email)):
+        if (login_service.user_exists(email)):
             return json.dumps({"success":"false"})
         else:
-            LoginService.new_user(name, email, password)
+            login_service.new_user(name, email, password)
             return json.dumps({"success":"true"})
     return "404"
 
@@ -88,8 +86,8 @@ def team():
 def work():
     return render_template('work.html')
 
-
 @app.route('/dashboard.html')
+@login_required
 def dashboard():
     return render_template('dashboard.html')
 
