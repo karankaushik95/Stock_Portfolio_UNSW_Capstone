@@ -29,7 +29,7 @@ def login():
             user = User(email)
             login_service.login_session_user(user)
             login_user(user)
-            return json.dumps({"success":"true"})
+            return redirect(url_for("dashboard"))
         else:
             return json.dumps({"success":"false"})
     return "404"
@@ -41,15 +41,15 @@ def signup():
         email = request.form['registerUsername']
         password = request.form['registerPassword']
         if (login_service.user_exists(email)):
-            return json.dumps({"success":"false"})
+            return redirect(url_for("index"))
         else:
             login_service.new_user(name, email, password)
-            return json.dumps({"success":"true"})
+            return json.dumps({"success":"false"})
     return "404"
 
 @app.route('/about.html')
 def about():
-    return render_template('about.html')
+    return render_template('about.html') 
 
 
 @app.route('/blog-single.html')
@@ -87,7 +87,6 @@ def work():
     return render_template('work.html')
 
 @app.route('/dashboard.html')
-@login_required
 def dashboard():
     return render_template('dashboard.html')
 

@@ -44,6 +44,7 @@ class LoginService():
         return False
 
     def new_user(self, name, email, password):
+        print("Creating new user: ", email, password)
         connection = sqlite3.connect('db/users.db')
         cursor = connection.cursor()
         sql = """ INSERT INTO users VALUES ("{}", "{}", "{}");"""
