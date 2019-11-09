@@ -325,7 +325,7 @@ function search() {
 
                         graphDiv.appendChild(navbar);
 
-                        if (!stockInfo["Time Series"]["Note"]) {
+                        if (stockInfo["Time Series"]["Meta Data"]) {
 
                             const divider = document.createElement("div");
                             divider.setAttribute("class", "col-md-6");
@@ -360,14 +360,14 @@ function search() {
 
                             var daily = [];
                             for (key in bigData) {
-                                
+
                                 daily.push(bigData[key]["1. open"]);
                                 daily.push(bigData[key]["2. high"]);
                                 daily.push(bigData[key]["3. low"]);
                                 daily.push(bigData[key]["4. close"]);
                                 break;
                             }
-                            
+
                             var myChart = initChart(daily, graph);
 
                             li8.addEventListener('click', () => {
@@ -379,7 +379,7 @@ function search() {
                                 li2.setAttribute("class", "nav-item");
                                 li1.setAttribute("class", "nav-item");
 
-                                drawChart(array, myChart);
+                                myChart = drawChart(array, myChart);
                             });
 
                             li3.addEventListener('click', () => {
@@ -390,7 +390,7 @@ function search() {
                                 li2.setAttribute("class", "nav-item");
                                 li1.setAttribute("class", "nav-item");
 
-                                drawChart(array.slice(0, 7), myChart);
+                                myChart = drawChart(array.slice(0, 7), myChart);
                             });
 
                             li4.addEventListener('click', () => {
@@ -401,7 +401,7 @@ function search() {
                                 li2.setAttribute("class", "nav-item");
                                 li1.setAttribute("class", "nav-item");
 
-                                drawChart(array.slice(0, 31) , myChart);
+                                myChart = drawChart(array.slice(0, 31), myChart);
                             });
 
                             li2.addEventListener('click', () => {
@@ -412,7 +412,7 @@ function search() {
                                 li8.setAttribute("class", "nav-item");
                                 li1.setAttribute("class", "nav-item");
 
-                                drawChart(array.slice(0, 5), myChart);
+                                myChart = drawChart(array.slice(0, 5), myChart);
                             });
 
                             li1.addEventListener('click', () => {
@@ -423,12 +423,14 @@ function search() {
                                 li2.setAttribute("class", "nav-item");
                                 li8.setAttribute("class", "nav-item");
 
-                                drawChart(daily, myChart);
+                                myChart = drawChart(daily, myChart);
                             });
 
                             contentDiv.appendChild(graphDiv);
-                            
+
                         } else {
+
+
                             const time_series_error_div = document.createElement("div");
                             const time_series_error = document.createElement("p");
                             time_series_error.innerText = "Time series data is unavailable for " + children[1].textContent || children[1].innerText || "" + "!";
@@ -437,9 +439,10 @@ function search() {
 
                             time_series_error_div.appendChild(time_series_error);
                             graphDiv.appendChild(time_series_error_div);
+                            contentDiv.appendChild(graphDiv);
                         }
 
-                        
+
                         contentDiv.appendChild(document.createElement("br"));
 
                         const lastDiv = document.createElement("div");
@@ -482,7 +485,7 @@ function search() {
 }
 
 function initChart(data, graph) {
-    
+
     var options = {
         type: 'line',
         data: {
@@ -520,9 +523,9 @@ function initChart(data, graph) {
 }
 
 function drawChart(data, myChart) {
-    
+
     myChart.destroy();
-    
+
     var options = {
         type: 'line',
         data: {
@@ -550,6 +553,7 @@ function drawChart(data, myChart) {
     }
     var ctx = document.getElementById("chartjs-staked-line-chart").getContext("2d");
     myChart = new Chart(ctx, options);
+    return myChart;
 }
 
 
