@@ -154,18 +154,25 @@ document.getElementById("loginButton").addEventListener("click", function (event
         let formData = new FormData();
         formData.append("username", username.value);
         formData.append("password", password.value);
-        
-        fetch(apiUrl+"/login", {
+        console.log(username.value);
+        console.log(password.value);
+        fetch(apiUrl + "/login", {
             method: 'POST',
             body: formData
-        }).then(resp => resp.json()).then(function (response) {
-            console.log(response);
-            if(response["success"] === "true"){
-                sessionStorage.setItem("username", username.value);
-                window.location.href = "/dashboard.html";
-            }
-        });
-        //alert("Valid");
+        })
+        .then(resp => console.log(resp))
+        //.then(data => console.log(data));
+        // {
+        //     console.log(response);
+        //     // if (response["success"] === "false") {
+        //     //     username.style.borderColor = "red";
+        //     //     username.focus();
+        //     //     passwordSpan.innerText = "Please check your credentials and try again";
+        //     //     password.focus();
+        //     //     password.style.borderColor = "red";
+        //     //     return;
+        //     // }
+        // });
     }
 });
 

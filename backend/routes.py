@@ -22,17 +22,18 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        email = request.form['username']
-        password = request.form['password']
-        if (login_service.check(email,password)):
-            user = User(email)
-            login_service.login_session_user(user)
-            login_user(user)
-            return json.dumps({"success":"true"})
-        else:
-            return json.dumps({"success":"false"})
-    return render_template('error.html')
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
+    email = request.form['username']
+    password = request.form['password']
+    print(email, password)
+    if login_service.check(email,password):
+        user = User(email)
+        login_service.login_session_user(user)
+        login_user(user)
+        return redirect(url_for('dashboard'))
+    else:
+        return json.dumps({"success":"false"})
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -87,7 +88,7 @@ def work():
     return render_template('work.html')
 
 @app.route('/dashboard.html')
-@login_required
+#@login_required
 def dashboard():
     return render_template('dashboard.html')
 

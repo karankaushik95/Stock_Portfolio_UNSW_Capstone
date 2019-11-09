@@ -175,7 +175,7 @@ function search() {
                     fetch(apiUrl + "/stock/" + stockID, {
                         method: 'GET',
                     }).then(sresp => sresp.json()).then(function (stockInfo) {
-                        //console.log(response); 
+                        console.log(stockInfo);
 
 
                         loaderDiv.parentElement.removeChild(loaderDiv);
@@ -221,8 +221,8 @@ function search() {
                         contentDiv.appendChild(stockSymbol);
                         contentDiv.appendChild(currentPrice);
                         contentDiv.setAttribute("class", "animate-bottom");
-                        
-                        
+
+
                         holderDiv.appendChild(containerDiv1);
                         holderDiv.appendChild(contentDiv);
 
@@ -236,10 +236,10 @@ function search() {
                         });
 
                         const graphDiv = document.createElement("div");
-                        
+
                         const navbar = document.createElement("nav");
                         navbar.setAttribute("class", "navbar navbar-expand-sm bg-light navbar-light");
-                        
+
                         const menu = document.createElement("ul");
                         menu.setAttribute("class", "navbar-nav");
                         menu.setAttribute("id", "navigation-menu");
@@ -249,26 +249,15 @@ function search() {
                         const a1 = document.createElement("a");
                         a1.setAttribute("href", "#");
                         a1.setAttribute("class", "nav-link");
-                        a1.innerText="1 day";
+                        a1.innerText = "1 day";
                         li1.appendChild(a1);
-
-                        if(!stockInfo["Time Series"]["Time Series"]){
-                            const time_series_error = document.createElement("p");
-                            time_series_error.innerText = "Time series data is unavailable for "+ children[1].textContent || children[1].innerText || "" +"!";
-                            time_series_error.style.fontSize="30px";
-                            time_series_error.style.textAlign ="center";
-                            li1.appendChild(time_series_error);
-                        }else{
-                            console.log("we will we will show you data");
-                        }
-
 
                         const li2 = document.createElement("li");
                         li2.setAttribute("class", "nav-item");
                         const a2 = document.createElement("a");
                         a2.setAttribute("href", "#");
                         a2.setAttribute("class", "nav-link");
-                        a2.innerText="5 days";
+                        a2.innerText = "5 days";
                         li2.appendChild(a2);
 
                         const li3 = document.createElement("li");
@@ -276,7 +265,7 @@ function search() {
                         const a3 = document.createElement("a");
                         a3.setAttribute("href", "#");
                         a3.setAttribute("class", "nav-link");
-                        a3.innerText="1 month";
+                        a3.innerText = "1 week";
                         li3.appendChild(a3);
 
                         const li4 = document.createElement("li");
@@ -284,39 +273,40 @@ function search() {
                         const a4 = document.createElement("a");
                         a4.setAttribute("href", "#");
                         a4.setAttribute("class", "nav-link");
-                        a4.innerText="6 months";
+                        a4.innerText = "1 month";
                         li4.appendChild(a4);
 
-                        const li5 = document.createElement("li");
-                        li5.setAttribute("class", "nav-item");
-                        const a5 = document.createElement("a");
-                        a5.setAttribute("href", "#");
-                        a5.setAttribute("class", "nav-link");
-                        a5.innerText="YTD";
-                        li5.appendChild(a5);
+                        // const li5 = document.createElement("li");
+                        // li5.setAttribute("class", "nav-item");
+                        // const a5 = document.createElement("a");
+                        // a5.setAttribute("href", "#");
+                        // a5.setAttribute("class", "nav-link");
+                        // a5.innerText = "YTD";
+                        // li5.appendChild(a5);
 
-                        const li6 = document.createElement("li");
-                        li6.setAttribute("class", "nav-item");
-                        const a6 = document.createElement("a");
-                        a6.setAttribute("href", "#");
-                        a6.setAttribute("class", "nav-link");
-                        a6.innerText="1 year";
-                        li6.appendChild(a6);
+                        // const li6 = document.createElement("li");
+                        // li6.setAttribute("class", "nav-item");
+                        // const a6 = document.createElement("a");
+                        // a6.setAttribute("href", "#");
+                        // a6.setAttribute("class", "nav-link");
+                        // a6.innerText = "1 year";
+                        // li6.appendChild(a6);
 
-                        const li7 = document.createElement("li");
-                        li7.setAttribute("class", "nav-item");
-                        const a7 = document.createElement("a");
-                        a7.setAttribute("href", "#");
-                        a7.setAttribute("class", "nav-link");
-                        a7.innerText="5 years";
-                        li7.appendChild(a7);
+                        // const li7 = document.createElement("li");
+                        // li7.setAttribute("class", "nav-item");
+                        // const a7 = document.createElement("a");
+                        // a7.setAttribute("href", "#");
+                        // a7.setAttribute("class", "nav-link");
+                        // a7.innerText = "5 years";
+                        // li7.appendChild(a7);
 
                         const li8 = document.createElement("li");
                         li8.setAttribute("class", "nav-item");
+                        li8.setAttribute("id", "max-time");
                         const a8 = document.createElement("a");
                         a8.setAttribute("href", "#");
                         a8.setAttribute("class", "nav-link");
-                        a8.innerText="Max";
+                        a8.innerText = "Max";
                         li8.appendChild(a8);
 
 
@@ -324,9 +314,9 @@ function search() {
                         menu.appendChild(li2);
                         menu.appendChild(li3);
                         menu.appendChild(li4);
-                        menu.appendChild(li5);
-                        menu.appendChild(li6);
-                        menu.appendChild(li7);
+                        // menu.appendChild(li5);
+                        // menu.appendChild(li6);
+                        // menu.appendChild(li7);
                         menu.appendChild(li8);
 
                         // navDiv.appendChild(menu);
@@ -335,10 +325,125 @@ function search() {
 
                         graphDiv.appendChild(navbar);
 
-                        contentDiv.appendChild(graphDiv);
+                        if (!stockInfo["Time Series"]["Note"]) {
+
+                            const divider = document.createElement("div");
+                            divider.setAttribute("class", "col-md-6");
+
+                            const divider2 = document.createElement("div");
+                            divider2.setAttribute("class", "grid");
+
+                            const divider3 = document.createElement("div");
+                            divider3.setAttribute("class", "grid-body");
+
+                            const divider4 = document.createElement("div");
+                            divider4.setAttribute("class", "item-wrapper");
+
+                            const graph = document.createElement("canvas");
+                            graph.setAttribute("id", "chartjs-staked-line-chart");
+                            graph.setAttribute("width", "800");
+                            graph.setAttribute("height", "500");
+
+                            divider4.appendChild(graph);
+                            divider3.appendChild(divider4);
+                            divider2.appendChild(divider3);
+                            divider.appendChild(divider2);
+
+                            graphDiv.appendChild(divider);
+
+                            const bigData = stockInfo["Time Series"]["Time Series (Daily)"];
+
+                            var array = [];
+                            for (key in bigData) {
+                                array.push(bigData[key]["4. close"]);
+                            }
+
+                            var daily = [];
+                            for (key in bigData) {
+                                
+                                daily.push(bigData[key]["1. open"]);
+                                daily.push(bigData[key]["2. high"]);
+                                daily.push(bigData[key]["3. low"]);
+                                daily.push(bigData[key]["4. close"]);
+                                break;
+                            }
+                            
+                            var myChart = initChart(daily, graph);
+
+                            li8.addEventListener('click', () => {
+
+
+                                li8.setAttribute("class", "nav-item active");
+                                li4.setAttribute("class", "nav-item");
+                                li3.setAttribute("class", "nav-item");
+                                li2.setAttribute("class", "nav-item");
+                                li1.setAttribute("class", "nav-item");
+
+                                drawChart(array, myChart);
+                            });
+
+                            li3.addEventListener('click', () => {
+
+                                li3.setAttribute("class", "nav-item active");
+                                li4.setAttribute("class", "nav-item");
+                                li8.setAttribute("class", "nav-item");
+                                li2.setAttribute("class", "nav-item");
+                                li1.setAttribute("class", "nav-item");
+
+                                drawChart(array.slice(0, 7), myChart);
+                            });
+
+                            li4.addEventListener('click', () => {
+
+                                li4.setAttribute("class", "nav-item active");
+                                li8.setAttribute("class", "nav-item");
+                                li3.setAttribute("class", "nav-item");
+                                li2.setAttribute("class", "nav-item");
+                                li1.setAttribute("class", "nav-item");
+
+                                drawChart(array.slice(0, 31) , myChart);
+                            });
+
+                            li2.addEventListener('click', () => {
+
+                                li2.setAttribute("class", "nav-item active");
+                                li4.setAttribute("class", "nav-item");
+                                li3.setAttribute("class", "nav-item");
+                                li8.setAttribute("class", "nav-item");
+                                li1.setAttribute("class", "nav-item");
+
+                                drawChart(array.slice(0, 5), myChart);
+                            });
+
+                            li1.addEventListener('click', () => {
+
+                                li1.setAttribute("class", "nav-item active");
+                                li4.setAttribute("class", "nav-item");
+                                li3.setAttribute("class", "nav-item");
+                                li2.setAttribute("class", "nav-item");
+                                li8.setAttribute("class", "nav-item");
+
+                                drawChart(daily, myChart);
+                            });
+
+                            contentDiv.appendChild(graphDiv);
+                            
+                        } else {
+                            const time_series_error_div = document.createElement("div");
+                            const time_series_error = document.createElement("p");
+                            time_series_error.innerText = "Time series data is unavailable for " + children[1].textContent || children[1].innerText || "" + "!";
+                            time_series_error.style.fontSize = "30px";
+                            time_series_error.style.textAlign = "center";
+
+                            time_series_error_div.appendChild(time_series_error);
+                            graphDiv.appendChild(time_series_error_div);
+                        }
+
+                        
+                        contentDiv.appendChild(document.createElement("br"));
 
                         const lastDiv = document.createElement("div");
-                        console.log(stockInfo);
+                        //console.log(stockInfo);
                         const p1 = document.createElement("p");
                         p1.innerText = "Open: \t" + stockInfo["Global Quote"]["02. open"];
 
@@ -351,9 +456,9 @@ function search() {
                         const p4 = document.createElement("p");
                         p4.innerText = "Prev Close: \t" + stockInfo["Global Quote"]["08. previous close"];
 
-                        const p5 = document.createElement("p");    
+                        const p5 = document.createElement("p");
                         p5.innerText = "Change: \t" + stockInfo["Global Quote"]["09. change"];
-                        
+
                         const p6 = document.createElement("p");
                         p6.innerText = "Change percent: \t" + stockInfo["Global Quote"]["10. change percent"];
 
@@ -375,6 +480,79 @@ function search() {
         });
     });
 }
+
+function initChart(data, graph) {
+    
+    var options = {
+        type: 'line',
+        data: {
+            labels: data,
+            datasets: [{
+                data: data,
+                borderWidth: 2,
+                fill: false,
+                backgroundColor: chartColors[0],
+                borderColor: chartColors[0],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        reverse: false
+                    }
+                }]
+            },
+            fill: false,
+            legend: false
+        }
+    }
+
+    var ctx = graph.getContext('2d');
+
+    // if (window.graph) {
+    //     console.log("destroying");
+    //     graph.destroy();
+    // }
+    return new Chart(ctx, options);
+
+}
+
+function drawChart(data, myChart) {
+    
+    myChart.destroy();
+    
+    var options = {
+        type: 'line',
+        data: {
+            labels: data,
+            datasets: [{
+                data: data,
+                borderWidth: 2,
+                fill: false,
+                backgroundColor: chartColors[0],
+                borderColor: chartColors[0],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        reverse: false
+                    }
+                }]
+            },
+            fill: false,
+            legend: false
+        }
+    }
+    var ctx = document.getElementById("chartjs-staked-line-chart").getContext("2d");
+    myChart = new Chart(ctx, options);
+}
+
+
 
 logout();
 search();
