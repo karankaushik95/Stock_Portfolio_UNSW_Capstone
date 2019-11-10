@@ -1,5 +1,5 @@
 import sqlite3
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager
 
 
 class LoginService():
@@ -23,7 +23,6 @@ class LoginService():
         self.session_users.append(user)
 
     def check(self, email, password):
-
         connection = sqlite3.connect('db/users.db')
         cursor = connection.cursor()
         sql_command = """ SELECT email FROM users;"""
@@ -48,8 +47,22 @@ class LoginService():
         connection = sqlite3.connect('db/users.db')
         cursor = connection.cursor()
         sql = """ INSERT INTO users VALUES ("{}", "{}", "{}");"""
-        query = sql.format(name, email, password)
+        query = sql.format(name, str(email), password)
         cursor.execute(query)
+        connection.commit()
+        connection.close()
+
+        self.name_tables(email)
+
+    def name_tables(self, email):
+        db_name = 'db/users/' + str(email)
+        connection = sqlite3.connect(db_name)
+        cursor = connection.cursor()
+        sql_command = """CREATE TABLE if not exists portfolio_names (id INTEGER PRIMARY KEY, name VARCHAR(100));"""
+        cursor.execute(sql_command)
+
+        sql_command = """CREATE TABLE if not exists watchlist_names (id INTEGER PRIMARY KEY, name VARCHAR(100));"""
+        cursor.execute(sql_command)
         connection.commit()
         connection.close()
 
@@ -58,21 +71,3 @@ class LoginService():
             if (user.email == email):
                 return user
         return None
-
-
-class User(UserMixin):
-
-    def __init__(self, user_id):
-        self.email = user_id
-
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return True
-
-    def get_id(self):
-        return self.email
