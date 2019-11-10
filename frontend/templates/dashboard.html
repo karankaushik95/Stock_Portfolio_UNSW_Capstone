@@ -12,10 +12,14 @@
   <!-- endinject -->
   <!-- Layout style -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/demo_1/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
   <!-- Layout style -->
-  <link rel="shortcut icon" href="{{ url_for('static', filename='/images/favicon.ico') }}" />
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+  <link rel="https://cdn.muicss.com/mui-0.10.0/css/mui.min.css"/>
+  <script src="https://cdn.muicss.com/mui-0.10.0/js/mui.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  
 </head>
 
 <body class="header-fixed">
@@ -35,11 +39,11 @@
         <form action="#" class="t-header-search-box">
           <div class="input-group">
             <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" autocomplete="off">
-            <button class="btn btn-primary" id="search_button" type="submit"><i
-                class="mdi mdi-arrow-right-thick"></i></button>
+            <button class="btn btn-primary" id="search_button" type="submit"><i class="mdi mdi-arrow-right-thick"
+                id="thati"></i></button>
           </div>
         </form>
-        <ul class="nav ml-auto">
+        <!-- <ul class="nav ml-auto">
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" id="notificationDropdown" data-toggle="dropdown" aria-expanded="false">
               <i class="mdi mdi-bell-outline mdi-1x"></i>
@@ -165,7 +169,7 @@
               </div>
             </div>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
   </nav>
@@ -192,6 +196,18 @@
           </a>
         </li>
         <li>
+          <a href="#">
+            <span class="link-title" id="Portfolios">Portfolios</span>
+            <i class="mdi mdi-flower-tulip-outline link-icon"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="link-title" id="Watchlist">Watchlist</span>
+            <i class="mdi mdi-flower-tulip-outline link-icon"></i>
+          </a>
+        </li>
+        <li>
           <a href="pages/forms/form-elements.html">
             <span class="link-title">Trends and Analytics</span>
             <i class="mdi mdi-clipboard-outline link-icon"></i>
@@ -199,7 +215,7 @@
         </li>
         <li>
           <a href="#" style="text-decoration: none;">
-            <span class="link-title" data-toggle="popover" data-placement="right" title="Work in Progress" 
+            <span class="link-title" data-toggle="popover" data-placement="right" title="Work in Progress"
               data-content="This section is still being built by our awesome engineers! Please check back soon!">Buy/Sell
               Shares</span>
             <i class="mdi mdi-chart-donut link-icon"></i>
@@ -212,8 +228,8 @@
           </a>
         </li>
         <li>
-          <a href="pages/icons/material-icons.html">
-            <span class="link-title">Logout</span>
+          <a href="#">
+            <span class="link-title" id="Logout">Logout</span>
             <i class="mdi mdi-flower-tulip-outline link-icon"></i>
           </a>
         </li>
@@ -654,13 +670,12 @@
   </div>
   <script>
     function load() {
-      console.log("clicked");
       $("#dashboard_heading").load('dashboard.html');
     }
 
-    $(document).ready(function(){ 
-        $('[data-toggle="popover"]').popover();    
-    }); 
+    $(document).ready(function () {
+      $('[data-toggle="popover"]').popover();
+    });
   </script>
   <!--page body ends -->
   <!-- SCRIPT LOADING START FORM HERE /////////////-->
@@ -676,6 +691,7 @@
   <!-- build:js -->
   <script src="{{ url_for('static', filename='js/template.js') }}"></script>
   <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dashboard_byteme.js') }}"></script>
   <!-- endbuild -->
 </body>
 

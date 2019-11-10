@@ -4,14 +4,34 @@ from os import path
 import json
 
 
-def bootstrap():
+def bootstrap_db():
     # create_tickers_db()
     # populate_tickers_table()
 
     # create_stock_db()
     # populate_stock_static_table()
-    populate_stock_volatile_table()
+    # populate_stock_volatile_table()
+        
+    #if not path.exists('users.db'):
+    bootstrap_users_db()
+    #populate_users_db()
 
+def bootstrap_users_db():
+    connection = sqlite3.connect('users.db')
+    cursor = connection.cursor()
+    sql_command = """ CREATE TABLE users(name, email, password);"""
+    cursor.execute(sql_command)
+    connection.commit()
+    connection.close()
+    
+def populate_users_db():
+    connection = sqlite3.connect('users.db')
+    cursor = connection.cursor()
+    sql = """ INSERT INTO users (email, password) VALUES ("{}", "{}");"""
+    query = sql.format("jack", "jack")
+    cursor.execute(query)
+    connection.commit()
+    connection.close()
 
 def create_tickers_db():
     connection = sqlite3.connect('tickers.db')
@@ -117,7 +137,6 @@ def populate_stock_volatile_table():
     connection.commit()
     connection.close()
     print("Finished")
-
-
-if __name__ == "__main__":
-    bootstrap()
+    
+if __name__ == '__main__':
+    bootstrap_db()
