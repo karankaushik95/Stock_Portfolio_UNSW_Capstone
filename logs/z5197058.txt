@@ -23,3 +23,9 @@ This week, I finished the setup of the SQL tables, and wrote the python files ne
 Week 6 (21/10/19)
 
 I connected our front-end to our back-end and ensured that the correct files were being served when you clicked on the links. I also began work on the web scraper.
+
+Week 7 (28/10/19)
+
+Wrote the endpoints for the stock and market profile pages, made sure that they were serving the correct files and data, switched over to using Alpha Vantage instead of IEX for the API endpoint, as it was not providing enough stock data, only a limited set of stocks.
+
+Week 8 (04/11/19)
