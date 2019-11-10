@@ -25,27 +25,37 @@ def login():
     if request.method == 'POST':
         email = request.form['username']
         password = request.form['password']
+        print("attempting login")
         if (login_service.check(email,password)):
             user = User(email)
             login_service.login_session_user(user)
             login_user(user)
-            return redirect(url_for("dashboard"))
+            print("logging in")
+            return json.dumps({"success":"true"})
         else:
+            print("incorrect login")
             return json.dumps({"success":"false"})
-    return render_template('error.html')
+    return render_template('dashboard.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    print("Attempting signup")
     if request.method == 'POST': 
-        name = request.form['registerName']
+        print("Attempting signup")
         email = request.form['registerUsername']
+        name = request.form['registerName']
         password = request.form['registerPassword']
         if (login_service.user_exists(email)):
-            return redirect(url_for("index"))
+            print("already signed up")
+            return json.dumps({"success":"false"})
         else:
             login_service.new_user(name, email, password)
-            return json.dumps({"success":"false"})
-    return "404"
+            user = User(email)
+            login_service.login_session_user(user)
+            login_user(user)
+            print("now signed up")
+            return json.dumps({"success":"true"})
+    return render_template('dashboard.html')
 
 @app.route('/about.html')
 def about():
@@ -87,6 +97,7 @@ def work():
     return render_template('work.html')
 
 @app.route('/dashboard.html')
+@login_required
 def dashboard():
     return render_template('dashboard.html')
 

@@ -37,7 +37,6 @@ class LoginService():
 
         # Note the length of emails will be the same as passwords, ie: the number of users
         for i in range(len(emails)):
-            print(emails[i][0])
             if email == emails[i][0]:
                 if password == passwords[i][0]:
                     return True
