@@ -175,51 +175,56 @@ document.getElementById("loginButton").addEventListener("click", function (event
 });
 
 document.getElementById("registerButton").addEventListener("click", function (event) {
+    
     event.preventDefault();
-    const fullName = document.getElementById("registerName");
-    const fullNameError = document.getElementById("register_name_error");
+    window.location.href = "/register.html";
 
-    const username = document.getElementById("registerUsername");
-    const usernameError = document.getElementById("register_username_error");
+    
+    // event.preventDefault();
+    // const fullName = document.getElementById("registerName");
+    // const fullNameError = document.getElementById("register_name_error");
 
-    const password = document.getElementById("registerPassword");
-    const passwordError = document.getElementById("register_password_error");
+    // const username = document.getElementById("registerUsername");
+    // const usernameError = document.getElementById("register_username_error");
 
-    if (!password.value.trim()) {
-        passwordError.innerText = "Please enter a password";
-        password.focus();
-        password.style.borderColor = "red";
-    } else {
-        password.style.borderColor = "";
-        passwordError.innerText = "";
-    }
-    if (!username.value.trim()) {
-        username.style.borderColor = "red";
-        username.focus();
-        usernameError.innerText = "Please enter a username";
-    } else {
-        if (!username.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-            username.style.borderColor = "red";
-            username.focus();
-            usernameError.innerText = "Please enter a valid email address";
-            return;
-        } else {
-            usernameError.innerText = "";
-            username.style.borderColor = "";
-        }
-    }
-    if (!fullName.value.trim()) {
-        fullName.style.borderColor = "red";
-        fullName.focus();
-        fullNameError.innerText = "Please enter your name";
-    } else {
-        fullNameError.innerText = "";
-        fullName.style.borderColor = "";
-    }
+    // const password = document.getElementById("registerPassword");
+    // const passwordError = document.getElementById("register_password_error");
 
-    if (username.value && fullName.value && password.value) {
-        alert("valid");
-        // call register api
-    }
+    // if (!password.value.trim()) {
+    //     passwordError.innerText = "Please enter a password";
+    //     password.focus();
+    //     password.style.borderColor = "red";
+    // } else {
+    //     password.style.borderColor = "";
+    //     passwordError.innerText = "";
+    // }
+    // if (!username.value.trim()) {
+    //     username.style.borderColor = "red";
+    //     username.focus();
+    //     usernameError.innerText = "Please enter a username";
+    // } else {
+    //     if (!username.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+    //         username.style.borderColor = "red";
+    //         username.focus();
+    //         usernameError.innerText = "Please enter a valid email address";
+    //         return;
+    //     } else {
+    //         usernameError.innerText = "";
+    //         username.style.borderColor = "";
+    //     }
+    // }
+    // if (!fullName.value.trim()) {
+    //     fullName.style.borderColor = "red";
+    //     fullName.focus();
+    //     fullNameError.innerText = "Please enter your name";
+    // } else {
+    //     fullNameError.innerText = "";
+    //     fullName.style.borderColor = "";
+    // }
+
+    // if (username.value && fullName.value && password.value) {
+    //     alert("valid");
+    //     // call register api
+    // }
 
 });
