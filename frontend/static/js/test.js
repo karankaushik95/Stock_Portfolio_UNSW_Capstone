@@ -1,3 +1,5 @@
+const apiUrl = "http://127.0.0.1:5000"
+
 const username = document.getElementById("username");
 // const usernameSpan = document.getElementById("username_error");
 
