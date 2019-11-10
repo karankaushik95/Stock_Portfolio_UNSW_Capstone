@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
-from service.login.login_service import LoginService
+from user.login_service import LoginService
 
 app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
 app.config.from_envvar('PROJ_CONFIG')

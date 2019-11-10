@@ -5,7 +5,7 @@ from server import app, login_service
 from modules.stock.stock_m_worker import stockMWorker
 from modules.stock.stock_s_worker import stockSWorker
 from modules.search.search_s_worker import searchSWorker
-from service.login.login_service import User
+from user.user import User
 import json
 import requests
 
@@ -49,6 +49,39 @@ def signup():
             login_user(user)
             return redirect(url_for('dashboard'))
     return render_template('signup.html')
+
+
+# ENDPOINT FOR USER DATA
+@app.route('/user_data')
+@login_required
+def user_data():
+    return json.dumps(current_user.get_details())
+
+
+# ENDPOINT FOR USER PORTFOLIOS
+@app.route('/user_portfolios')
+@login_required
+def user_portfolios():
+    return json.dumps(current_user.get_portfolios())
+
+
+# ENDPOINT FOR USER WATCHLISTS
+@app.route('/user_watchlists')
+@login_required
+def user_watchlists():
+    return json.dumps(current_user.get_watchlists())
+
+
+@app.route('/create_portfolio')
+@login_required
+def create_portfolio():
+    return "hello"
+
+
+@app.route('/create_watchlist')
+@login_required
+def create_watchlist():
+    return "hello"
 
 
 @app.route('/about.html')

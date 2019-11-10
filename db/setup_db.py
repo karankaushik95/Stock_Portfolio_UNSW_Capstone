@@ -12,7 +12,7 @@ def bootstrap_db():
     # populate_stock_static_table()
     # populate_stock_volatile_table()
 
-    # bootstrap_users_db()
+    bootstrap_users_db()
     # populate_users_db()
     print("boostrap")
 
