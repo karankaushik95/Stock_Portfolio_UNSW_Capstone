@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user 
+import flask_login
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from server import app, login_service
 from modules.stock.stock_m_worker import stockMWorker
 from modules.stock.stock_s_worker import stockSWorker
@@ -9,57 +10,50 @@ import json
 import requests
 
 
-@app.route('/api')
-def test_api():
-    url = app.config["IEX_SANDBOX_URL"] + "stock/AAPL/quote" + app.config["IEX_SANDBOX_TOKEN"]
-    data = requests.get(url)
-    json_data = json.loads(data.text)
-    return json.dumps(json_data)
-
 @app.route('/index.html', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+
+@app.route('/login.html', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
     if request.method == 'POST':
         email = request.form['username']
-        password = request.form['password']
-        print("attempting login")
-        if (login_service.check(email,password)):
+        passwd = request.form['password']
+        if login_service.check(email, passwd):
             user = User(email)
             login_service.login_session_user(user)
             login_user(user)
-            print("logging in")
-            return json.dumps({"success":"true"})
+            return redirect(url_for('dashboard'))
         else:
             print("incorrect login")
-            return json.dumps({"success":"false"})
-    return render_template('dashboard.html')
+    return render_template('log.html')
 
-@app.route('/signup', methods=['GET', 'POST'])
+
+@app.route('/signup.html', methods=['GET', 'POST'])
 def signup():
-    print("Attempting signup")
-    if request.method == 'POST': 
-        print("Attempting signup")
-        email = request.form['registerUsername']
-        name = request.form['registerName']
-        password = request.form['registerPassword']
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
+    if request.method == 'POST':
+        email = request.form['regemail']
+        name = request.form['regname']
+        password = request.form['regpassword']
         if (login_service.user_exists(email)):
-            print("already signed up")
-            return json.dumps({"success":"false"})
+            return redirect(url_for('dashboard'))
         else:
             login_service.new_user(name, email, password)
             user = User(email)
             login_service.login_session_user(user)
             login_user(user)
-            print("now signed up")
-            return json.dumps({"success":"true"})
-    return render_template('dashboard.html')
+            return redirect(url_for('dashboard'))
+    return render_template('signup.html')
+
 
 @app.route('/about.html')
 def about():
-    return render_template('about.html') 
+    return render_template('about.html')
 
 
 @app.route('/blog-single.html')
@@ -95,6 +89,7 @@ def team():
 @app.route('/work.html')
 def work():
     return render_template('work.html')
+
 
 @app.route('/dashboard.html')
 @login_required
@@ -183,4 +178,3 @@ def test_symbols():
 @app.route('/error')
 def error():
     return "404"
-
