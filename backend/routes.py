@@ -86,6 +86,11 @@ def team():
 def work():
     return render_template('work.html')
 
+@app.route('/login.html')
+def work():
+    return render_template('login.html')
+
+
 @app.route('/dashboard.html')
 @login_required
 def dashboard():

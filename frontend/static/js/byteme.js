@@ -125,48 +125,53 @@ document.getElementById("forgotPassSubmit").addEventListener("click", function (
 document.getElementById("loginButton").addEventListener("click", function (event) {
 
     event.preventDefault();
-    const username = document.getElementById("username");
-    const usernameSpan = document.getElementById("username_error");
+    window.location.href = "/login.html";
 
-    const password = document.getElementById("password");
-    const passwordSpan = document.getElementById("password_error");
-    passwordSpan.style.color = "red";
-    usernameSpan.style.color = "red";
+    // const username = document.getElementById("username");
+    // // const usernameSpan = document.getElementById("username_error");
 
-    if (!password.value.trim()) {
-        passwordSpan.innerText = "Please enter your password";
-        password.focus();
-        password.style.borderColor = "red";
-    } else {
-        password.style.borderColor = "";
-        passwordSpan.innerText = "";
-    }
-    if (!username.value.trim()) {
-        username.style.borderColor = "red";
-        username.focus();
-        usernameSpan.innerText = "Please enter a username";
-    } else {
-        usernameSpan.innerText = "";
-        username.style.borderColor = "";
-    }
-    if (username.value && password.value) {
-        //call API
-        let formData = new FormData();
-        formData.append("username", username.value);
-        formData.append("password", password.value);
+    // const password = document.getElementById("password");
+    // // const passwordSpan = document.getElementById("password_error");
+    // // passwordSpan.style.color = "red";
+    // // usernameSpan.style.color = "red";
+
+    
+    // let formData = new FormData();
+    //     formData.append("username", username.value);
+    //     formData.append("password", password.value);
         
-        fetch(apiUrl+"/login", {
-            method: 'POST',
-            body: formData
-        }).then(resp => resp.json()).then(function (response) {
-            console.log(response);
-            if(response["success"] === "true"){
-                sessionStorage.setItem("username", username.value);
-                window.location.href = "/dashboard.html";
-            }
-        });
-        //alert("Valid");
-    }
+    //     fetch(apiUrl+"/login", {
+    //         method: 'POST',
+    //         body: formData
+    //     }).then(resp => resp.json()).then(function (response) {
+    //         console.log(response);
+    //         if(response["success"] === "true"){
+    //             sessionStorage.setItem("username", username.value);
+    //             window.location.href = "/dashboard.html";
+    //         }
+    //     });
+    
+    // if (!password.value.trim()) {
+    //     passwordSpan.innerText = "Please enter your password";
+    //     password.focus();
+    //     password.style.borderColor = "red";
+    // } else {
+    //     password.style.borderColor = "";
+    //     passwordSpan.innerText = "";
+    // }
+    // if (!username.value.trim()) {
+    //     username.style.borderColor = "red";
+    //     username.focus();
+    //     usernameSpan.innerText = "Please enter a username";
+    // } else {
+    //     usernameSpan.innerText = "";
+    //     username.style.borderColor = "";
+    // }
+    // if (username.value && password.value) {
+    //     //call API
+        
+    //     //alert("Valid");
+    // }
 });
 
 document.getElementById("registerButton").addEventListener("click", function (event) {
