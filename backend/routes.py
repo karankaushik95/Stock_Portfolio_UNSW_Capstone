@@ -50,6 +50,11 @@ def signup():
             return redirect(url_for('dashboard'))
     return render_template('signup.html')
 
+@app.route('/logout.html')
+def logout():
+    logout_user()
+    login_service.logout_session_user(current_user)
+    return redirect(url_for('index'))
 
 @app.route('/about.html')
 def about():
