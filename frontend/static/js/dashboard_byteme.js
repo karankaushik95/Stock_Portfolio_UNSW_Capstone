@@ -5,7 +5,6 @@ const apiUrl = "http://127.0.0.1:5000"
 // }
 
 
-
 function logout() {
     document.getElementById("Logout").addEventListener("click", function (event) {
         sessionStorage.clear();
@@ -557,6 +556,21 @@ function drawChart(data, myChart) {
 }
 
 
+function loadProfile() {
 
-logout();
+    document.getElementById("profile").addEventListener("click", ()=>{
+        $("#dashboard_heading").load('profile.html');
+    });
+    
+    // document.getElementById("profile-username").innerText = sessionStorage.getItem("email");
+    // document.getElementById("profile-fullname").innerText = sessionStorage.getItem("name");
+
+}
+
+$(document).ready(function () {
+    $('[data-toggle="popover"]').popover();
+});
+
 search();
+loadProfile();
+logout();

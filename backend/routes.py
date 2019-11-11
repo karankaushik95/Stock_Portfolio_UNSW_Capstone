@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, Response
+from flask import render_template, request, redirect, url_for, Response, flash
 import flask_login
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from server import app, login_service
@@ -118,9 +118,10 @@ def team():
     return render_template('team.html')
 
 
-@app.route('/work.html')
+@app.route('/profile.html')
+@login_required
 def work():
-    return render_template('work.html')
+    return render_template('profile.html')
 
 
 @app.route('/dashboard.html')
