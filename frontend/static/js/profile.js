@@ -1,13 +1,11 @@
-// async function fetchHtmlAsText(url) {
-//     console.log("async triggered");
-//     return await (await fetch(url)).text();
-// }
+window.addEventListener("load", (event)=>{
+    document.getElementById("profile-username").innerText = sessionStorage.getItem("email");
+    document.getElementById("profile-fullname").innerText = sessionStorage.getItem("name");
+    console.log("HERE");
+});
 
-// function loadhome() {
-//     document.getElementById("profile").addEventListener("click", async function (event) {
-//         event.preventDefault();
-//         document.getElementById("dashboard_heading").innerHTML = await fetchHtmlAsText("../index.html");
-//     });
-// }
-
-// loadhome();
+window.onload = ()=>{
+    document.getElementById("profile-username").innerText = sessionStorage.getItem("email");
+    document.getElementById("profile-fullname").innerText = sessionStorage.getItem("name");
+    console.log("HERE");
+};

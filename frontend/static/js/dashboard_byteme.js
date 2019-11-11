@@ -513,10 +513,6 @@ function initChart(data, graph) {
 
     var ctx = graph.getContext('2d');
 
-    // if (window.graph) {
-    //     console.log("destroying");
-    //     graph.destroy();
-    // }
     return new Chart(ctx, options);
 
 }
@@ -561,10 +557,6 @@ function loadProfile() {
     document.getElementById("profile").addEventListener("click", ()=>{
         $("#dashboard_heading").load('profile.html');
     });
-    
-    // document.getElementById("profile-username").innerText = sessionStorage.getItem("email");
-    // document.getElementById("profile-fullname").innerText = sessionStorage.getItem("name");
-
 }
 
 $(document).ready(function () {
