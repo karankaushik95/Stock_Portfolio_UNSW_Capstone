@@ -1,0 +1,32 @@
+Week 1
+
+Initial research into the seven projects. Not interested in projects about hardware. Project 5, 6 and 7 are all good for me.
+
+Week 2
+
+Formed a group in the lab and discussed about the available projects. We decided to choose project 6, however we were refused at first because no one in our group had financial background.
+
+Week 3
+
+We finally got project 6 and writen the proposal in the whole week. I focused on background researching. Confirmed the APIs and tools we were going to use.
+
+Week 4
+
+Since I did not have any experience about web applications, I spent much time learning basic knowledge. Tried to create simple web application by flask locally.
+
+Week 5
+
+Read the template written by my team mates and began working with backend. Changes the template about the backend and added watchlist.
+
+Week 6
+
+Designed and Created a database for watchlist. Reviewed the knowledge about SQL. Tried to interact between framework and database.
+
+Week 7
+
+Read the front-end code carefully and tried to understand how it connected with backend. Added functions adding stocks, remove stocks and view stocks details to watchlist.
+
+
+Week 8
+
+Finished the backend of watchlist. Modified some front-end pages to make them fit our project.
