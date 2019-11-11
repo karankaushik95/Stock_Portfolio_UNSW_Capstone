@@ -11,27 +11,30 @@ def bootstrap_db():
     # create_stock_db()
     # populate_stock_static_table()
     # populate_stock_volatile_table()
-        
-    #if not path.exists('users.db'):
+
     bootstrap_users_db()
-    #populate_users_db()
+    # populate_users_db()
+    print("boostrap")
+
 
 def bootstrap_users_db():
     connection = sqlite3.connect('users.db')
     cursor = connection.cursor()
-    sql_command = """ CREATE TABLE users(name, email, password);"""
+    sql_command = """ CREATE TABLE users (name VARCHAR(50), email VARCHAR(100), password VARCHAR(100));"""
     cursor.execute(sql_command)
     connection.commit()
     connection.close()
-    
+
+
 def populate_users_db():
     connection = sqlite3.connect('users.db')
     cursor = connection.cursor()
-    sql = """ INSERT INTO users (email, password) VALUES ("{}", "{}");"""
-    query = sql.format("jack", "jack")
+    sql = """ INSERT INTO users (name, email, password) VALUES ("{}", "{}", "{}");"""
+    query = sql.format('jack', 'jack', 'jack')
     cursor.execute(query)
     connection.commit()
     connection.close()
+
 
 def create_tickers_db():
     connection = sqlite3.connect('tickers.db')
@@ -137,6 +140,7 @@ def populate_stock_volatile_table():
     connection.commit()
     connection.close()
     print("Finished")
-    
+
+
 if __name__ == '__main__':
     bootstrap_db()

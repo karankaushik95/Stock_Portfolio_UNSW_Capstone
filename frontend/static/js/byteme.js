@@ -125,6 +125,7 @@ document.getElementById("forgotPassSubmit").addEventListener("click", function (
 document.getElementById("loginButton").addEventListener("click", function (event) {
 
     event.preventDefault();
+<<<<<<< HEAD
     const username = document.getElementById("username");
     const usernameSpan = document.getElementById("username_error");
 
@@ -174,54 +175,108 @@ document.getElementById("loginButton").addEventListener("click", function (event
         //     // }
         // });
     }
+=======
+    window.location.href = "/login.html";
+
+    // const username = document.getElementById("username");
+    // // const usernameSpan = document.getElementById("username_error");
+
+    // const password = document.getElementById("password");
+    // // const passwordSpan = document.getElementById("password_error");
+    // // passwordSpan.style.color = "red";
+    // // usernameSpan.style.color = "red";
+
+    
+    // let formData = new FormData();
+    //     formData.append("username", username.value);
+    //     formData.append("password", password.value);
+        
+    //     fetch(apiUrl+"/login", {
+    //         method: 'POST',
+    //         body: formData
+    //     }).then(resp => resp.json()).then(function (response) {
+    //         console.log(response);
+    //         if(response["success"] === "true"){
+    //             sessionStorage.setItem("username", username.value);
+    //             window.location.href = "/dashboard.html";
+    //         }
+    //     });
+    
+    // if (!password.value.trim()) {
+    //     passwordSpan.innerText = "Please enter your password";
+    //     password.focus();
+    //     password.style.borderColor = "red";
+    // } else {
+    //     password.style.borderColor = "";
+    //     passwordSpan.innerText = "";
+    // }
+    // if (!username.value.trim()) {
+    //     username.style.borderColor = "red";
+    //     username.focus();
+    //     usernameSpan.innerText = "Please enter a username";
+    // } else {
+    //     usernameSpan.innerText = "";
+    //     username.style.borderColor = "";
+    // }
+    // if (username.value && password.value) {
+    //     //call API
+        
+    //     //alert("Valid");
+    // }
+>>>>>>> master
 });
 
 document.getElementById("registerButton").addEventListener("click", function (event) {
+    
     event.preventDefault();
-    const fullName = document.getElementById("registerName");
-    const fullNameError = document.getElementById("register_name_error");
+    window.location.href = "/register.html";
 
-    const username = document.getElementById("registerUsername");
-    const usernameError = document.getElementById("register_username_error");
+    
+    // event.preventDefault();
+    // const fullName = document.getElementById("registerName");
+    // const fullNameError = document.getElementById("register_name_error");
 
-    const password = document.getElementById("registerPassword");
-    const passwordError = document.getElementById("register_password_error");
+    // const username = document.getElementById("registerUsername");
+    // const usernameError = document.getElementById("register_username_error");
 
-    if (!password.value.trim()) {
-        passwordError.innerText = "Please enter a password";
-        password.focus();
-        password.style.borderColor = "red";
-    } else {
-        password.style.borderColor = "";
-        passwordError.innerText = "";
-    }
-    if (!username.value.trim()) {
-        username.style.borderColor = "red";
-        username.focus();
-        usernameError.innerText = "Please enter a username";
-    } else {
-        if (!username.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-            username.style.borderColor = "red";
-            username.focus();
-            usernameError.innerText = "Please enter a valid email address";
-            return;
-        } else {
-            usernameError.innerText = "";
-            username.style.borderColor = "";
-        }
-    }
-    if (!fullName.value.trim()) {
-        fullName.style.borderColor = "red";
-        fullName.focus();
-        fullNameError.innerText = "Please enter your name";
-    } else {
-        fullNameError.innerText = "";
-        fullName.style.borderColor = "";
-    }
+    // const password = document.getElementById("registerPassword");
+    // const passwordError = document.getElementById("register_password_error");
 
-    if (username.value && fullName.value && password.value) {
-        alert("valid");
-        // call register api
-    }
+    // if (!password.value.trim()) {
+    //     passwordError.innerText = "Please enter a password";
+    //     password.focus();
+    //     password.style.borderColor = "red";
+    // } else {
+    //     password.style.borderColor = "";
+    //     passwordError.innerText = "";
+    // }
+    // if (!username.value.trim()) {
+    //     username.style.borderColor = "red";
+    //     username.focus();
+    //     usernameError.innerText = "Please enter a username";
+    // } else {
+    //     if (!username.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+    //         username.style.borderColor = "red";
+    //         username.focus();
+    //         usernameError.innerText = "Please enter a valid email address";
+    //         return;
+    //     } else {
+    //         usernameError.innerText = "";
+    //         username.style.borderColor = "";
+    //     }
+    // }
+    // if (!fullName.value.trim()) {
+    //     fullName.style.borderColor = "red";
+    //     fullName.focus();
+    //     fullNameError.innerText = "Please enter your name";
+    // } else {
+    //     fullNameError.innerText = "";
+    //     fullName.style.borderColor = "";
+    // }
+
+    // if (username.value && fullName.value && password.value) {
+    //     alert("valid");
+    //     // call register api
+    // }
 
 });

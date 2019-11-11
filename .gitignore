@@ -4,3 +4,5 @@ __pycache__/
 sqlite/
 dbhold/
 /backend/*.pyc
+.DS_Store
+
