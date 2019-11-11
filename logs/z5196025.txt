@@ -28,4 +28,4 @@ Finished logout, added a WIP for Buy/Sell shares, finished search, added hyperli
 
 Week 8 (05/10/19)
 
-Fixed some CSS errors
+Fixed some CSS errors, finished stock profile, connected login and register endpoints, fixed some random issues with login endpoint

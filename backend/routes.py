@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, Response
 import flask_login
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from server import app, login_service
@@ -28,9 +28,8 @@ def login():
             login_user(user)
             return redirect(url_for('dashboard'))
         else:
-            print("incorrect login")
-    return render_template('log.html')
-
+            return Response(status="401")   
+    return render_template('login.html')
 
 @app.route('/signup.html', methods=['GET', 'POST'])
 def signup():
@@ -41,14 +40,14 @@ def signup():
         name = request.form['regname']
         password = request.form['regpassword']
         if (login_service.user_exists(email)):
-            return redirect(url_for('dashboard'))
+            return Response(status="401")
         else:
             login_service.new_user(name, email, password)
             user = User(email)
             login_service.login_session_user(user)
             login_user(user)
             return redirect(url_for('dashboard'))
-    return render_template('signup.html')
+    return render_template('register.html')
 
 
 # ENDPOINT FOR USER DATA
@@ -125,7 +124,7 @@ def work():
 
 
 @app.route('/dashboard.html')
-#@login_required
+@login_required
 def dashboard():
     return render_template('dashboard.html')
 
