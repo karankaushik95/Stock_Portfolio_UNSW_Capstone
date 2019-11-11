@@ -19,16 +19,17 @@
   <script src="https://cdn.muicss.com/mui-0.10.0/js/mui.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  
+  <script src="{{ url_for('static', filename='js/charts/chart.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/initial.js') }}"></script>
 </head>
 
 <body class="header-fixed">
   <!-- partial:partials/_header.html -->
   <nav class="t-header">
     <div class="t-header-brand-wrapper">
-      <a href="index.html">
-        <img class="logo" src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
-        <img class="logo-mini" src="{{ url_for('static', filename='images/logo_mini.svg') }}" alt="">
+      <a href="#">
+        <p class="logo" style="color:#696ffb">Byte_me</p>
+        <p class="logo-mini"style="color:#696ffb">B</p>
       </a>
     </div>
     <div class="t-header-content-wrapper">
@@ -183,14 +184,14 @@
             src="{{ url_for('static', filename='images/profile/male/image_1.png') }}" alt="profile image">
         </div>
         <div class="info-wrapper">
-          <p class="user-name">Allen Clerk</p>
-          <h6 class="display-income">allen.clerk@unsw.edu.au</h6> <!-- replace with email address-->
+          <p class="user-name" id="user-name">Allen Clerk</p>
+          <h6 class="display-income" id ="user-email">allen.clerk@unsw.edu.au</h6> <!-- replace with email address-->
         </div>
       </div>
       <ul class="navigation-menu">
         <li class="nav-category-divider">MAIN</li>
         <li>
-          <a href="index.html">
+          <a href="dashboard.html">
             <span class="link-title">Dashboard</span>
             <i class="mdi mdi-gauge link-icon"></i>
           </a>
@@ -222,7 +223,7 @@
           </a>
         </li>
         <li>
-          <a href="#" onclick="load();return false;">
+          <a href="#">
             <span class="link-title" id="profile">Profile</span>
             <i class="mdi mdi-flower-tulip-outline link-icon"></i>
           </a>
@@ -668,21 +669,13 @@
     </div>
     <!-- page content ends -->
   </div>
-  <script>
-    function load() {
-      $("#dashboard_heading").load('dashboard.html');
-    }
-
-    $(document).ready(function () {
-      $('[data-toggle="popover"]').popover();
-    });
-  </script>
+  
   <!--page body ends -->
   <!-- SCRIPT LOADING START FORM HERE /////////////-->
   <!-- plugins:js -->
   <script src="{{ url_for('static', filename='vendors/js/core.js') }}"></script>
   <!-- endinject -->
-  <!-- Vendor Js For This Page Ends-->
+  <!-- Vendor Js For This Page Ends -->
   <script src="{{ url_for('static', filename='vendors/apexcharts/apexcharts.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendors/chartjs/Chart.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/charts/chartjs.addon.js') }}"></script>

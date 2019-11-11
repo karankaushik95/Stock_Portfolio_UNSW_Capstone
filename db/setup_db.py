@@ -12,9 +12,9 @@ def bootstrap_db():
     # populate_stock_static_table()
     # populate_stock_volatile_table()
 
-    # if not path.exists('users.db'):
     bootstrap_users_db()
-    populate_users_db()
+    # populate_users_db()
+    print("boostrap")
 
 
 def bootstrap_users_db():

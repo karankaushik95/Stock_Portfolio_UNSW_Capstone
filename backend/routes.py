@@ -1,11 +1,11 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, Response, flash
 import flask_login
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from server import app, login_service
 from modules.stock.stock_m_worker import stockMWorker
 from modules.stock.stock_s_worker import stockSWorker
 from modules.search.search_s_worker import searchSWorker
-from service.login.login_service import User
+from user.user import User
 import json
 import requests
 
@@ -23,14 +23,14 @@ def login():
         email = request.form['username']
         passwd = request.form['password']
         if login_service.check(email, passwd):
+            print('here')
             user = User(email)
             login_service.login_session_user(user)
             login_user(user)
             return redirect(url_for('dashboard'))
         else:
-            print("incorrect login")
-    return render_template('log.html')
-
+            return Response(status="401")   
+    return render_template('login.html')
 
 @app.route('/signup.html', methods=['GET', 'POST'])
 def signup():
@@ -41,19 +41,52 @@ def signup():
         name = request.form['regname']
         password = request.form['regpassword']
         if (login_service.user_exists(email)):
-            return redirect(url_for('dashboard'))
+            return Response(status="401")
         else:
             login_service.new_user(name, email, password)
             user = User(email)
             login_service.login_session_user(user)
             login_user(user)
             return redirect(url_for('dashboard'))
-    return render_template('signup.html')
+    return render_template('register.html')
+
+
+# ENDPOINT FOR USER DATA
+@app.route('/user_data')
+@login_required
+def user_data():
+    return json.dumps(current_user.get_details())
+
+
+# ENDPOINT FOR USER PORTFOLIOS
+@app.route('/user_portfolios')
+@login_required
+def user_portfolios():
+    return json.dumps(current_user.get_portfolios())
+
+
+# ENDPOINT FOR USER WATCHLISTS
+@app.route('/user_watchlists')
+@login_required
+def user_watchlists():
+    return json.dumps(current_user.get_watchlists())
+
+
+@app.route('/create_portfolio')
+@login_required
+def create_portfolio():
+    return "hello"
+
+
+@app.route('/create_watchlist')
+@login_required
+def create_watchlist():
+    return "hello"
 
 @app.route('/logout.html')
 def logout():
-    logout_user()
     login_service.logout_session_user(current_user)
+    logout_user()
     return redirect(url_for('index'))
 
 @app.route('/about.html')
@@ -91,9 +124,10 @@ def team():
     return render_template('team.html')
 
 
-@app.route('/work.html')
+@app.route('/profile.html')
+@login_required
 def work():
-    return render_template('work.html')
+    return render_template('profile.html')
 
 
 @app.route('/dashboard.html')

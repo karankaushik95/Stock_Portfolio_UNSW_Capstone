@@ -23,14 +23,14 @@
 
 <body>
     <div class="authentication-theme auth-style_1">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-12 logo-section">
                 <a href="/index.html" class="logo">
                     <p class="logo" style="color:#696ffb">Byte_me</p>
                     <p class="logo-mini" style="color:#696ffb">B</p>
                 </a>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-lg-5 col-md-7 col-sm-9 col-11 mx-auto">
                 <div class="grid">
@@ -39,30 +39,22 @@
                             <div class="col-lg-7 col-md-8 col-sm-9 col-12 mx-auto form-wrapper">
                                 <form action="#">
                                     <div class="form-group input-rounded">
-                                        <input type="text" class="form-control" id="username" placeholder="Email (also used as your username)" />
-                                        <span class="error">
-                                            <p id="username_error"></p>
-                                        </span>
+                                        <label>Username:</label>
+                                        <input type="text" class="form-control" id="profile-username" disabled />
                                     </div>
                                     <div class="form-group input-rounded">
-                                        <input type="text" class="form-control" id="fullname" placeholder="Full Name" />
-                                        <span class="error">
-                                            <p id="name_error"></p>
-                                        </span>
+                                        <label>Full Name:</label>
+                                        <input type="text" class="form-control" id="profile-fullname" disabled />
                                     </div>
                                     <div class="form-group input-rounded">
-                                        <input type="password" class="form-control" id="password"
-                                            placeholder="Password" />
-                                        <span class="error">
-                                            <p id="password_error"></p>
-                                        </span>
+                                        <label>Password:</label>
+                                        <input type="password" class="form-control" id="profile-password"
+                                            placeholder="Leave blank for no change" />
                                     </div>
-                                    <button type="submit" id="login" class="btn btn-primary btn-block"> Sign Up </button>
+                                    <button type="submit" id="save" class="btn btn-primary btn-block"> Save </button>
+                                    <button type="submit" id="cancel" class="btn btn-primary btn-block"> Cancel
+                                    </button>
                                 </form>
-                                <div class="signup-link">
-                                    <p>Already a member?</p>
-                                    <a href="./login.html">Login</a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -80,7 +72,6 @@
     <!-- Vendor Js For This Page Ends-->
     <!-- build:js -->
     <script src="{{ url_for('static', filename='js/template.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
     <!-- endbuild -->
 </body>
 
