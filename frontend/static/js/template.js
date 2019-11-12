@@ -28,33 +28,33 @@ MobileToggler.on("click", function () {
 
 
 // CHECK FOR CURRENT PAGE AND ADDS AN ACTIVE CLASS FOR TO THE ACTIVE LINK
-var current = location.pathname.split("/").slice(-1)[0].replace(/^\/|\/$/g, '');
-$('.navigation-menu li a', TemplateSidebar).each(function () {
-  var $this = $(this);
-  if (current === "") {
-    //FOR ROOT URL
-    if ($this.attr('href').indexOf("index.html") !== -1) {
-      $(this).parents('li').last().addClass('active');
-      if ($(this).parents('.navigation-submenu').length) {
-        $(this).addClass('active');
-      }
-    }
-  } else {
-    //FOR OTHER URL
-    if ($this.attr('href').indexOf(current) !== -1) {
-      $(this).parents('li').last().addClass('active');
-      if ($(this).parents('.navigation-submenu').length) {
-        $(this).addClass('active');
-      }
-      if (current !== "index.html") {
-        $(this).parents('li').last().find("a").attr("aria-expanded", "true");
-        if ($(this).parents('.navigation-submenu').length) {
-          $(this).closest('.collapse').addClass('show');
-        }
-      }
-    }
-  }
-});
+// var current = location.pathname.split("/").slice(-1)[0].replace(/^\/|\/$/g, '');
+// $('.navigation-menu li a', TemplateSidebar).each(function () {
+//   var $this = $(this);
+//   if (current === "") {
+//     //FOR ROOT URL
+//     if ($this.attr('href').indexOf("index.html") !== -1) {
+//       $(this).parents('li').last().addClass('active');
+//       if ($(this).parents('.navigation-submenu').length) {
+//         $(this).addClass('active');
+//       }
+//     }
+//   } else {
+//     //FOR OTHER URL
+//     if ($this.attr('href').indexOf(current) !== -1) {
+//       $(this).parents('li').last().addClass('active');
+//       if ($(this).parents('.navigation-submenu').length) {
+//         $(this).addClass('active');
+//       }
+//       if (current !== "index.html") {
+//         $(this).parents('li').last().find("a").attr("aria-expanded", "true");
+//         if ($(this).parents('.navigation-submenu').length) {
+//           $(this).closest('.collapse').addClass('show');
+//         }
+//       }
+//     }
+//   }
+// });
 
 $(".btn.btn-refresh").on("click", function () {
   $(this).addClass("clicked");
