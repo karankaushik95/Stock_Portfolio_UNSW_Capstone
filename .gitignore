@@ -6,5 +6,5 @@ dbhold/
 /backend/*.pyc
 .DS_Store
 db/users/
-db/users.db
+db/user.db
 
