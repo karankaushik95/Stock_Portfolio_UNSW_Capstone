@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 import sqlite3
-
+from time import gmtime, strftime
 
 class User(UserMixin):
 
@@ -32,9 +32,30 @@ class User(UserMixin):
             portfolio_names.append(row[1])
         connection.close()
         return portfolio_names
+    
+    def remove_portfolio_stock(self, ticker, portfolio_name):
+        db_name = 'db/users/' + str(self.email)
+        connection = sqlite3.connect(db_name)
+        cursor = connection.cursor()
+        sql_command = """DELETE FROM "{}" WHERE ticker = "{}";"""
+        sql_query = sql_command.format(portfolio_name, ticker)
+        cursor.execute(sql_query)
+        connection.commit()
+        connection.close()
+
+        
+    def add_portfolio_stock(self, ticker, amount, portfolio_name):
+        db_name = 'db/users/' + str(self.email)
+        connection = sqlite3.connect(db_name)
+        cursor = connection.cursor()
+        sql_command = """INSERT INTO "{}" (id, ticker, amount, time_added) VALUES ("{}", "{}", "{}", "{}");"""
+        sql_query = sql_command.format(portfolio_name, 1, ticker, amount, strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+        cursor.execute(sql_query)
+        connection.commit()
+        connection.close()
 
     def create_watchlist(self, watchlist_name):
-        watchlist_names = self.check_watchlist_names()
+        watchlist_names = self.get_watchlist_names()
         if watchlist_name in watchlist_names:
             return False
 
@@ -52,8 +73,22 @@ class User(UserMixin):
         connection.close()
         return True
 
+    def delete_portfolio(self, portfolio_name):
+        db_name = 'db/users/' + str(self.email)
+        connection = sqlite3.connect(db_name)
+        cursor = connection.cursor()
+        sql_command = """DELETE FROM portfolio_names WHERE name = "{}";"""
+        sql_query = sql_command.format(portfolio_name)
+        cursor.execute(sql_query)
+
+        sql_command = """DROP TABLE "{}";"""
+        sql_query = sql_command.format(portfolio_name)
+        cursor.execute(sql_query)
+        connection.commit()
+        connection.close()
+
     def create_portfolio(self, portfolio_name):
-        portfolio_names = self.check_portfolio_names()
+        portfolio_names = self.get_portfolio_names()
         if portfolio_name in portfolio_names:
             return False
 
