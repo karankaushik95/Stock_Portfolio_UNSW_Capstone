@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 def test_portfolio_names():
-    db_name = 'users/keegan.gyoery@gmail.com'
+    db_name = 'users/k@k.com'
     connection = sqlite3.connect(db_name)
     cursor = connection.cursor()
     sql_command = """INSERT INTO portfolio_names VALUES ("{}", "{}");"""
@@ -17,7 +17,7 @@ def test_portfolio_names():
 
 
 def test_watchlist_names():
-    db_name = 'users/keegan.gyoery@gmail.com'
+    db_name = 'users/k@k.com'
     connection = sqlite3.connect(db_name)
     cursor = connection.cursor()
     sql_command = """INSERT INTO watchlist_names VALUES ("{}", "{}");"""
@@ -31,7 +31,7 @@ def test_watchlist_names():
 
 
 def test_portfolio():
-    db_name = 'users/keegan.gyoery@gmail.com'
+    db_name = 'users/k@k.com'
     connection = sqlite3.connect(db_name)
     cursor = connection.cursor()
 
@@ -70,7 +70,7 @@ def test_portfolio():
 
 
 def test_watchlist():
-    db_name = 'users/keegan.gyoery@gmail.com'
+    db_name = 'users/k@k.com'
     connection = sqlite3.connect(db_name)
     cursor = connection.cursor()
 

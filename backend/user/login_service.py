@@ -52,16 +52,16 @@ class LoginService():
         connection.commit()
         connection.close()
 
-        self.name_tables(email)
+        self.setup_tables(email)
 
-    def name_tables(self, email):
+    def setup_tables(self, email):
         db_name = 'db/users/' + str(email)
         connection = sqlite3.connect(db_name)
         cursor = connection.cursor()
         sql_command = """CREATE TABLE if not exists portfolio_names (id INTEGER PRIMARY KEY, name VARCHAR(100));"""
         cursor.execute(sql_command)
 
-        sql_command = """CREATE TABLE if not exists watchlist_names (id INTEGER PRIMARY KEY, name VARCHAR(100));"""
+        sql_command = """CREATE TABLE if not exists watchlist (id INTEGER PRIMARY KEY, ticker VARCHAR(20), time_added TEXT);"""
         cursor.execute(sql_command)
         connection.commit()
         connection.close()
