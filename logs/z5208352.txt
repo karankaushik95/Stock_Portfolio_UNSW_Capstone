@@ -29,3 +29,5 @@ This was a lighter week for me, I mostly tried to understand the front end code 
 Week 8
 
 Adapted the login service to the front end. Initially it was set up such that the login and signup forms were on their own html page, however now they are forms accessible from the dashboard. As I am unfamiliar with html and writing corresponding wrotes this required assistance from other members in the group.
+
+Week 9

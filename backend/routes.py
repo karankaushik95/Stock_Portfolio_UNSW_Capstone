@@ -23,6 +23,7 @@ def login():
         email = request.form['username']
         passwd = request.form['password']
         if login_service.check(email, passwd):
+            print('here')
             user = User(email)
             login_service.login_session_user(user)
             login_user(user)
@@ -125,6 +126,11 @@ def create_portfolio():
             return Response(status="401")
     return render_template('create_portfolio.html')
 
+@app.route('/logout.html')
+def logout():
+    login_service.logout_session_user(current_user)
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/about.html')
 def about():
