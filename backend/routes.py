@@ -31,6 +31,12 @@ def login():
             return Response(status="401")   
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    login_service.login_session_user(current_user)
+    logout_user()
+    return redirect(url_for('index'))
+
 @app.route('/signup.html', methods=['GET', 'POST'])
 def signup():
     if current_user.is_authenticated:

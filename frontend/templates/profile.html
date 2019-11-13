@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/demo_1/style.css') }}">
     <!-- Layout style -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+
 </head>
 
 <body>
@@ -40,11 +41,11 @@
                                 <form action="#">
                                     <div class="form-group input-rounded">
                                         <label>Username:</label>
-                                        <input type="text" class="form-control" id="profile-username" />
+                                        <input type="text" class="form-control" id="profile-username" disabled></input>
                                     </div>
                                     <div class="form-group input-rounded">
                                         <label>Full Name:</label>
-                                        <input type="text" class="form-control" id="profile-fullname" />
+                                        <input type="text" class="form-control" id="profile-fullname" disabled></input>
                                     </div>
                                     <div class="form-group input-rounded">
                                         <label>Password:</label>
@@ -67,12 +68,53 @@
     <!-- plugins:js -->
     <script src="{{ url_for('static', filename='vendors/js/core.js') }}"></script>
     <script src="{{ url_for('static', filename='vendors/js/vendor.addons.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            document.getElementById("profile-username").value = sessionStorage.getItem("username");
+            document.getElementById("profile-fullname").value = sessionStorage.getItem("name");
+        });
+
+        function changePassword() {
+            const password = document.getElementById("save");
+            password.addEventListener("click", function (event) {
+                event.preventDefault();
+                const newPass = document.getElementById("profile-password").value.trim();
+                if (!newPass) {
+                    window.location.href = "/dashboard.html";
+                } else {
+                    let formData = new FormData();
+                    formData.append("password", password.value);
+                    fetch("http://127.0.0.1:5000/changepassword", {
+                            method: "POST",
+                            body: formData
+                        }).then(resp => resp.json())
+                        .then(response => {
+                            window.location.href = "/dashboard.html";
+                        });
+                }
+            });
+        }
+
+
+        function cancelButton() {
+
+            document.getElementById("cancel").addEventListener("click", function (event) {
+
+                event.preventDefault();
+                window.location.href = "/dashboard.html";
+            });
+        }
+
+        changePassword();
+        cancelButton();
+    </script>
     <!-- endinject -->
     <!-- Vendor Js For This Page Ends-->
     <!-- Vendor Js For This Page Ends-->
     <!-- build:js -->
+    <!-- <script src="{{ url_for('static', filename='js/profile.js') }}"></script> -->
     <script src="{{ url_for('static', filename='js/template.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
     <!-- endbuild -->
 </body>
 
