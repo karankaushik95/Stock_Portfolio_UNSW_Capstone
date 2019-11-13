@@ -7,8 +7,12 @@ const apiUrl = "http://127.0.0.1:5000"
 
 function logout() {
     document.getElementById("Logout").addEventListener("click", function (event) {
-        sessionStorage.clear();
-        window.location.href = "/index.html";
+        fetch(apiUrl + "/logout", {
+            method: "GET"
+        }).then(response => {
+            sessionStorage.clear();
+            window.location.href = "/index.html";
+        });
     });
 }
 
@@ -554,7 +558,7 @@ function drawChart(data, myChart) {
 
 function loadProfile() {
 
-    document.getElementById("profile").addEventListener("click", ()=>{
+    document.getElementById("profile").addEventListener("click", () => {
         $("#dashboard_heading").load('profile.html');
     });
 }
