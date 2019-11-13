@@ -2,23 +2,11 @@ from flask_login import UserMixin
 import sqlite3
 from time import gmtime, strftime
 
+
 class User(UserMixin):
 
     def __init__(self, user_id):
         self.email = user_id
-
-    def get_watchlist_names(self):
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        sql_command = """SELECT * FROM watchlist_names;"""
-        cursor.execute(sql_command)
-        rows = cursor.fetchall()
-        watchlist_names = []
-        for row in rows:
-            watchlist_names.append(row[1])
-        connection.close()
-        return watchlist_names
 
     def get_portfolio_names(self):
         db_name = 'db/users/' + str(self.email)
@@ -32,7 +20,7 @@ class User(UserMixin):
             portfolio_names.append(row[1])
         connection.close()
         return portfolio_names
-    
+
     def remove_portfolio_stock(self, ticker, portfolio_name):
         db_name = 'db/users/' + str(self.email)
         connection = sqlite3.connect(db_name)
@@ -43,35 +31,35 @@ class User(UserMixin):
         connection.commit()
         connection.close()
 
-        
     def add_portfolio_stock(self, ticker, amount, portfolio_name):
         db_name = 'db/users/' + str(self.email)
         connection = sqlite3.connect(db_name)
         cursor = connection.cursor()
-        sql_command = """INSERT INTO "{}" (id, ticker, amount, time_added) VALUES ("{}", "{}", "{}", "{}");"""
-        sql_query = sql_command.format(portfolio_name, 1, ticker, amount, strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+        sql_command = """INSERT INTO "{}" (id, ticker, amount, time_added) VALUES (NULL, "{}", "{}", "{}");"""
+        sql_query = sql_command.format(portfolio_name, ticker, amount, strftime("%Y-%m-%d %H:%M:%S", gmtime()))
         cursor.execute(sql_query)
         connection.commit()
         connection.close()
 
-    def create_watchlist(self, watchlist_name):
-        watchlist_names = self.get_watchlist_names()
-        if watchlist_name in watchlist_names:
-            return False
-
+    def remove_watchlist_stock(self, ticker):
         db_name = 'db/users/' + str(self.email)
         connection = sqlite3.connect(db_name)
         cursor = connection.cursor()
-        sql_command = """INSERT INTO watchlist_names (name) VALUES ("{}");"""
-        sql_query = sql_command.format(watchlist_name)
-        cursor.execute(sql_query)
-
-        sql_command = """CREATE TABLE if not exists "{}" (id INTEGER PRIMARY KEY, ticker VARCHAR(20), time_added TEXT);"""
-        sql_query = sql_command.format(watchlist_name)
+        sql_command = """DELETE FROM watchlist WHERE ticker = "{}";"""
+        sql_query = sql_command.format(ticker)
         cursor.execute(sql_query)
         connection.commit()
         connection.close()
-        return True
+
+    def add_watchlist_stock(self, ticker):
+        db_name = 'db/users/' + str(self.email)
+        connection = sqlite3.connect(db_name)
+        cursor = connection.cursor()
+        sql_command = """INSERT INTO watchlist (id, ticker, time_added) VALUES (NULL, "{}", "{}");"""
+        sql_query = sql_command.format(ticker, strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+        cursor.execute(sql_query)
+        connection.commit()
+        connection.close()
 
     def delete_portfolio(self, portfolio_name):
         db_name = 'db/users/' + str(self.email)
@@ -89,7 +77,7 @@ class User(UserMixin):
 
     def create_portfolio(self, portfolio_name):
         portfolio_names = self.get_portfolio_names()
-        if portfolio_name in portfolio_names:
+        if portfolio_name in portfolio_names or portfolio_name == "watchlist":
             return False
 
         db_name = 'db/users/' + str(self.email)
@@ -124,8 +112,6 @@ class User(UserMixin):
         connection = sqlite3.connect(db_name)
         cursor = connection.cursor()
         portfolio_names = self.get_portfolio_names()
-        print(portfolio_names)
-
         portfolios = {}
         for portfolio in portfolio_names:
             sql_command = """ SELECT * FROM "{}";"""
@@ -144,25 +130,20 @@ class User(UserMixin):
             portfolios[str(portfolio)] = portfolio_data
         return portfolios
 
-    def get_watchlists(self):
+    def get_watchlist(self):
         db_name = 'db/users/' + str(self.email)
         connection = sqlite3.connect(db_name)
         cursor = connection.cursor()
-        watchlist_names = self.get_watchlist_names()
-        watchlists = {}
-        for watchlist in watchlist_names:
-            sql_command = """ SELECT * FROM "{}";"""
-            sql_query = sql_command.format(watchlist)
-            cursor.execute(sql_query)
-            rows = cursor.fetchall()
-            watchlist_data = {}
-            for row in rows:
-                row_data = {}
-                row_data["ticker"] = row[1]
-                row_data["time_added"] = row[2]
-                watchlist_data[str(row[0])] = row_data
-            watchlists[str(watchlist)] = watchlist_data
-        return watchlists
+        sql_command = """ SELECT * FROM watchlist;"""
+        cursor.execute(sql_command)
+        rows = cursor.fetchall()
+        watchlist_data = {}
+        for row in rows:
+            row_data = {}
+            row_data["ticker"] = row[1]
+            row_data["time_added"] = row[2]
+            watchlist_data[str(row[0])] = row_data
+        return watchlist_data
 
     def is_authenticated(self):
         return True

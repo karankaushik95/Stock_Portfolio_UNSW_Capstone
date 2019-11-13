@@ -31,11 +31,13 @@ def login():
             return Response(status="401")   
     return render_template('login.html')
 
+
 @app.route('/logout')
 def logout():
     login_service.login_session_user(current_user)
     logout_user()
     return redirect(url_for('index'))
+
 
 @app.route('/signup.html', methods=['GET', 'POST'])
 def signup():
@@ -71,28 +73,46 @@ def user_portfolios():
 
 
 # ENDPOINT FOR USER WATCHLISTS
-@app.route('/user_watchlists')
+@app.route('/user_watchlist')
 @login_required
 def user_watchlists():
-    return json.dumps(current_user.get_watchlists())
+    return json.dumps(current_user.get_watchlist())
+
+
+@app.route('/remove_watchlist_stock/<ticker>')
+@login_required
+def remove_watchlist_stock(ticker):
+    current_user.remove_watchlist_stock(ticker)
+    return redirect(url_for('user_watchlist'))
+
+
+@app.route('/add_watchlist_stock/<ticker>')
+@login_required
+def add_watchlist_stock(ticker):
+    current_user.add_watchlist_stock(ticker)
+    return redirect(url_for('user_watchlist'))
+
 
 @app.route('/remove_portfolio_stock/<ticker>/<portfolio_name>')
 @login_required
 def remove_portfolio_stock(ticker, portfolio_name):
-    current_user.remove_portfolio_stock(ticket, portfolio_name)
+    current_user.remove_portfolio_stock(ticker, portfolio_name)
     return redirect(url_for('user_portfolios'))
+
 
 @app.route('/add_portfolio_stock/<ticker>/<amount>/<portfolio_name>')
 @login_required
 def add_portfolio_stock(ticker, amount, portfolio_name):
-    current_user.add_portfolio_stock(ticket, amount, portfolio_name)
+    current_user.add_portfolio_stock(ticker, amount, portfolio_name)
     return redirect(url_for('user_portfolios'))
 
-@app.route('/delete_porfolio/<portfolio_name>')
+
+@app.route('/delete_portfolio/<portfolio_name>')
 @login_required
 def delete_porfolio(portfolio_name):
     current_user.delete_portfolio(portfolio_name)
     return redirect(url_for('user_portfolios'))
+
 
 @app.route('/create_portfolio.html', methods=['GET', 'POST'])
 @login_required
@@ -105,16 +125,6 @@ def create_portfolio():
             return Response(status="401")
     return render_template('create_portfolio.html')
 
-@app.route('/create_watchlist', methods=['GET', 'POST'])
-@login_required
-def create_watchlist():
-if request.method == 'POST':
-        watchlist_name = request.form['watchlist_name']
-        if (current_user.create_portfolio(watchlist_name)):
-            return redirect(url_for('user_watchlists'))
-        else:
-            return Response(status="401")
-    return render_template('create_watchlist.html')
 
 @app.route('/about.html')
 def about():
