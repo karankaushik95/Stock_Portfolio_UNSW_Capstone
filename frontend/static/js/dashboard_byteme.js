@@ -104,7 +104,7 @@ function search() {
             clearUI.appendChild(div3);
 
 
-            for (item of response.bestMatches) {
+            for (var item of response.bestMatches) {
                 const tr = document.createElement("tr");
 
                 const td1 = document.createElement("td");
@@ -357,12 +357,12 @@ function search() {
                             const bigData = stockInfo["Time Series"]["Time Series (Daily)"];
 
                             var array = [];
-                            for (key in bigData) {
+                            for (var key in bigData) {
                                 array.push(bigData[key]["4. close"]);
                             }
 
                             var daily = [];
-                            for (key in bigData) {
+                            for (var key in bigData) {
 
                                 daily.push(bigData[key]["1. open"]);
                                 daily.push(bigData[key]["2. high"]);
@@ -570,3 +570,5 @@ $(document).ready(function () {
 search();
 loadProfile();
 logout();
+
+export {initChart, drawChart};

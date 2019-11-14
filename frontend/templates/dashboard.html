@@ -550,7 +550,8 @@
   <!-- build:js -->
   <script src="{{ url_for('static', filename='js/template.js') }}"></script>
   <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/dashboard_byteme.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/dashboard_byteme.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/watchlist.js') }}"></script>
   <!-- endbuild -->
 </body>
 
