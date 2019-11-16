@@ -3,6 +3,24 @@ const apiUrl = "http://127.0.0.1:5000"
 // if (!sessionStorage.get("username")){
 //     window.location.href = "/index.html";
 // }
+var wishlist;
+var no_of_portfolios;
+
+fetch(apiUrl + "/user_watchlist", {
+    method: 'GET',
+}).then(resp => resp.json()).then(function (response) {
+    //console.log(response);
+    wishlist = response;
+});
+
+fetch(apiUrl + "/user_portfolios", {
+    method: 'GET',
+}).then(resp => resp.json()).then(function (response) {
+
+    //console.log(Object.keys(response).length);
+    no_of_portfolios = response;
+});
+
 
 
 function logout() {
@@ -121,21 +139,25 @@ function search() {
 
                 const td5 = document.createElement("td");
 
-
                 const buttonDiv = document.createElement("div");
+                buttonDiv.setAttribute("class", "dropdown");
 
-                const button = document.createElement("div");
-                button.setAttribute("class", "btn btn-success btn-rounded");
+                const button = document.createElement("button");
+                button.setAttribute("class", "btn btn-success btn-rounded dropbtn");
                 button.setAttribute("data-toggle", "tooltip");
-                button.setAttribute("title", "Add to watchlist");
+                button.setAttribute("title", "Add to..");
                 button.setAttribute("data-animation", "true");
                 button.setAttribute("data-placement", "auto");
-
-
 
                 button.innerText = "+";
 
                 buttonDiv.appendChild(button);
+
+                const dropdowndiv = document.createElement("div");
+
+
+
+
 
                 td5.appendChild(buttonDiv);
 
@@ -571,4 +593,7 @@ search();
 loadProfile();
 logout();
 
-export {initChart, drawChart};
+export {
+    initChart,
+    drawChart
+};
