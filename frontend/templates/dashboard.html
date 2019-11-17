@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
   <!-- Layout style -->
   <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
-  <link rel="https://cdn.muicss.com/mui-0.10.0/css/mui.min.css"/>
+  <link rel="https://cdn.muicss.com/mui-0.10.0/css/mui.min.css" />
   <script src="https://cdn.muicss.com/mui-0.10.0/js/mui.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -29,7 +29,7 @@
     <div class="t-header-brand-wrapper">
       <a href="#">
         <p class="logo" style="color:#696ffb">Byte_me</p>
-        <p class="logo-mini"style="color:#696ffb">B</p>
+        <p class="logo-mini" style="color:#696ffb">B</p>
       </a>
     </div>
     <div class="t-header-content-wrapper">
@@ -58,7 +58,7 @@
         </div>
         <div class="info-wrapper">
           <p class="user-name" id="user-name"></p>
-          <h6 class="display-income" id ="user-email"></h6>
+          <h6 class="display-income" id="user-email"></h6>
         </div>
       </div>
       <ul class="navigation-menu">
@@ -78,7 +78,7 @@
         <li>
           <a href="#">
             <span class="link-title" id="Watchlist">Watchlist</span>
-            <i class="mdi mdi-format-list-bulleted link-icon"></i> 
+            <i class="mdi mdi-format-list-bulleted link-icon"></i>
           </a>
         </li>
         <li>
@@ -536,7 +536,33 @@
     </div>
     <!-- page content ends -->
   </div>
-  
+
+  <div class="modal fade" id="portfolioModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" style="text-align: left;">Create a new Portfolio</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Enter name:</p>
+          <input type="text" class="form-control" id="portfolioName" placeholder="Portfolio Name" />
+          <span class="error">
+            <p id="portfolio_error"></p>
+          </span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="createPortfolio">Create</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
   <!--page body ends -->
   <!-- SCRIPT LOADING START FORM HERE /////////////-->
   <!-- plugins:js -->
@@ -550,6 +576,7 @@
   <!-- build:js -->
   <script src="{{ url_for('static', filename='js/template.js') }}"></script>
   <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/portfolios.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/dashboard_byteme.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/watchlist.js') }}"></script>
   <!-- endbuild -->

@@ -503,7 +503,6 @@ function search() {
 
 
                 tbody.appendChild(tr);
-                sessionStorage.setItem("search_response", clearUI.innerHTML);
             }
         });
     });
