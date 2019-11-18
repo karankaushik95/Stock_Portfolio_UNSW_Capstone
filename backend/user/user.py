@@ -113,6 +113,10 @@ class User(UserMixin):
         cursor = connection.cursor()
         portfolio_names = self.get_portfolio_names()
         portfolios = {}
+
+        conn = sqlite3.connect('db/stock_price.db')
+        curs = conn.cursor()
+
         for portfolio in portfolio_names:
             sql_command = """ SELECT * FROM "{}";"""
             sql_query = sql_command.format(portfolio)
@@ -124,6 +128,14 @@ class User(UserMixin):
                 print(row)
                 row_data = {}
                 row_data["ticker"] = row[1]
+                com = """ SELECT price FROM price WHERE ticker="{}";"""
+                query = com.format(row[1])
+                curs.execute(query)
+                res = curs.fetchall()
+                if res:
+                    row_data["price"] = res[0][0]
+                else:
+                    row_data["price"] = str(0)
                 row_data["amount"] = row[2]
                 row_data["time_added"] = row[3]
                 portfolio_data[str(row[0])] = row_data
