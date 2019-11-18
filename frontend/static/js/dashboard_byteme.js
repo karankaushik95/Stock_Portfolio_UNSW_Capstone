@@ -223,16 +223,16 @@ function search() {
                                     }
 
                                 }
-                                if (document.getElementById("quantity_error").value === "") {
-                                    document.getElementById("quantity_error").innerText = "";
-                                    fetch(apiUrl + "/add_watchlist_stock/" + stockID, {
-                                        method: "GET"
-                                    }).then(function () {
-                                        $('#addModal').modal('hide');
-                                        $('.modal-backdrop').hide();
-                                        searchButton.click();
-                                    });
-                                }
+
+                                document.getElementById("quantity_error").innerText = "";
+                                fetch(apiUrl + "/add_watchlist_stock/" + stockID, {
+                                    method: "GET"
+                                }).then(function () {
+                                    $('#addModal').modal('hide');
+                                    $('.modal-backdrop').hide();
+                                    searchButton.click();
+                                });
+
                             } else {
 
                                 if (!document.getElementById("qty").value) {
