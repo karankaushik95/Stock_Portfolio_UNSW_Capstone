@@ -75,7 +75,7 @@ def user_portfolios():
 # ENDPOINT FOR USER WATCHLISTS
 @app.route('/user_watchlist')
 @login_required
-def user_watchlists():
+def user_watchlist():
     return json.dumps(current_user.get_watchlist())
 
 
