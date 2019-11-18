@@ -84,14 +84,14 @@ def user_watchlist():
 @login_required
 def remove_watchlist_stock(ticker):
     current_user.remove_watchlist_stock(ticker)
-    return redirect(url_for('user_watchlists'))
+    return redirect(url_for('user_watchlist'))
 
 
 @app.route('/add_watchlist_stock/<ticker>')
 @login_required
 def add_watchlist_stock(ticker):
     current_user.add_watchlist_stock(ticker)
-    return redirect(url_for('user_watchlists'))
+    return redirect(url_for('user_watchlist'))
 
 
 @app.route('/remove_portfolio_stock/<ticker>/<portfolio_name>')

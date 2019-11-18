@@ -3,23 +3,7 @@ const apiUrl = "http://127.0.0.1:5000"
 // if (!sessionStorage.get("username")){
 //     window.location.href = "/index.html";
 // }
-var wishlist;
-var no_of_portfolios;
 
-fetch(apiUrl + "/user_watchlist", {
-    method: 'GET',
-}).then(resp => resp.json()).then(function (response) {
-    //console.log(response);
-    wishlist = response;
-});
-
-fetch(apiUrl + "/user_portfolios", {
-    method: 'GET',
-}).then(resp => resp.json()).then(function (response) {
-
-    //console.log(Object.keys(response).length);
-    no_of_portfolios = response;
-});
 
 
 
@@ -53,11 +37,33 @@ function search() {
         const loaderDiv = document.createElement("div");
         loaderDiv.setAttribute("id", "loader");
         clearUI.appendChild(loaderDiv);
-        document.getElementById("inlineFormInputGroup").value = "";
+        //document.getElementById("inlineFormInputGroup").value = "";
+
+        var wishlist;
+        var no_of_portfolios;
+
+        fetch(apiUrl + "/user_watchlist", {
+            method: 'GET',
+        }).then(resp => resp.json()).then(function (response) {
+            //console.log(response);
+            wishlist = response;
+        });
+
+        fetch(apiUrl + "/user_portfolios", {
+            method: 'GET',
+        }).then(resp => resp.json()).then(function (response2) {
+
+
+            no_of_portfolios = response2;
+        });
+
         fetch(apiUrl + "/search", {
             method: 'POST',
             body: formData
         }).then(resp => resp.json()).then(function (response) {
+
+
+
 
             loaderDiv.parentElement.removeChild(loaderDiv);
 
@@ -121,6 +127,36 @@ function search() {
             clearUI.appendChild(div1);
             clearUI.appendChild(div3);
 
+            const droplistdiv = document.createElement("div");
+            droplistdiv.setAttribute("id", "droplistdiv");
+
+            const dropdown = document.createElement("select");
+            const wishlistbtn = document.createElement("option");
+            wishlistbtn.innerText = "Watchlist";
+            dropdown.appendChild(wishlistbtn);
+            droplistdiv.appendChild(dropdown);
+
+            for (item in no_of_portfolios) {
+                console.log("help");
+                const option = document.createElement("option");
+                option.innerText = item;
+                dropdown.appendChild(option);
+            }
+
+            if (document.getElementById("modalbody").firstChild.id === "droplistdiv") {
+                document.getElementById("modalbody").removeChild(document.getElementById("modalbody").firstChild);
+            }
+            document.getElementById("modalbody").insertBefore(droplistdiv, document.getElementById("modalbody").firstChild);
+
+            dropdown.addEventListener("change", function () {
+                document.getElementById("quantity_error").innerText = "";
+                if (dropdown.value === "Watchlist") {
+                    document.getElementById("qty").style.display = "none";
+                } else {
+                    document.getElementById("qty").style.display = "";
+                }
+            });
+
 
             for (var item of response.bestMatches) {
                 const tr = document.createElement("tr");
@@ -143,7 +179,7 @@ function search() {
                 buttonDiv.setAttribute("class", "dropdown");
 
                 const button = document.createElement("button");
-                button.setAttribute("class", "btn btn-success btn-rounded dropbtn");
+                button.setAttribute("class", "btn btn-success btn-rounded");
                 button.setAttribute("data-toggle", "tooltip");
                 button.setAttribute("title", "Add to..");
                 button.setAttribute("data-animation", "true");
@@ -151,16 +187,75 @@ function search() {
 
                 button.innerText = "+";
 
-                const dropdowndiv = document.createElement("div");
-                
-                const test = document.createElement("a");
-                test.innerText = "Test";
-                test.setAttribute("href", "#");
-                dropdowndiv.setAttribute("class", "dropdown-content");
-                dropdowndiv.appendChild(test);
+
+                // const dropdowndiv = document.createElement("div");
+
+                // const test = document.createElement("a");
+                // test.innerText = "Test";
+                // test.style.textAlign ="left";
+                // test.setAttribute("href", "#");
+                // dropdowndiv.setAttribute("class", "dropdown-content");
+                // dropdowndiv.appendChild(test);
                 buttonDiv.appendChild(button);
-                buttonDiv.appendChild(dropdowndiv);
-                
+                button.setAttribute("data-toggle", "modal");
+                button.setAttribute("data-target", "#addModal");
+
+                button.addEventListener("click", () => {
+                    document.getElementById("quantity_error").innerText = "";
+                    //console.log(no_of_portfolios);
+                    const children = tr.childNodes;
+                    const stockID = children[1].textContent || children[1].innerText || "";
+
+
+                    const addButton = document.getElementById("addtostuff");
+
+                    addButton.addEventListener("click", function (event) {
+
+                        event.preventDefault();
+                        wrong:
+                            if (dropdown.value === "Watchlist") {
+                                for (var item in wishlist) {
+                                    if (wishlist[item]["ticker"] === stockID) {
+                                        document.getElementById("quantity_error").focus();
+                                        document.getElementById("quantity_error").innerText = "Already exists in selected option";
+                                        document.getElementById("quantity_error").style.color = "red";
+                                        break wrong;
+                                    }
+
+                                }
+                                if (document.getElementById("quantity_error").value === "") {
+                                    document.getElementById("quantity_error").innerText = "";
+                                    fetch(apiUrl + "/add_watchlist_stock/" + stockID, {
+                                        method: "GET"
+                                    }).then(function () {
+                                        $('#addModal').modal('hide');
+                                        $('.modal-backdrop').hide();
+                                        searchButton.click();
+                                    });
+                                }
+                            } else {
+
+                                if (!document.getElementById("qty").value) {
+                                    document.getElementById("quantity_error").focus();
+                                    document.getElementById("quantity_error").innerText = "Need quantity";
+                                    document.getElementById("quantity_error").style.color = "red";
+                                    return;
+                                } else {
+                                    document.getElementById("quantity_error").innerText = "";
+                                    fetch(apiUrl + "/add_portfolio_stock/" + stockID + "/" + document.getElementById("qty").value + "/" + dropdown.value, {
+                                        method: "get"
+                                    }).then(function () {
+                                        $('#addModal').modal('hide');
+                                        $('.modal-backdrop').hide();
+                                        searchButton.click();
+                                    });
+                                }
+                            }
+                    });
+
+                });
+                // buttonDiv.appendChild(dropdowndiv);
+
 
 
 

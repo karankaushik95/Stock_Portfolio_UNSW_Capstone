@@ -246,6 +246,8 @@ function populatePortfolios() {
                 clearUI.appendChild(div1);
                 clearUI.appendChild(div3);
 
+                var total_stock = 0;
+                var total_price = 0;
                 for (var stock in response[stockID]) {
                     //console.log(response[item][stock]);
                     const tr = document.createElement("tr");
@@ -257,10 +259,10 @@ function populatePortfolios() {
                     td2.innerText = response[stockID][stock]["amount"];
 
                     const td3 = document.createElement("td");
-                    td3.innerText = 0;
+                    td3.innerText = response[stockID][stock]["price"];
 
                     const td4 = document.createElement("td");
-                    td4.innerText = 0;
+                    td4.innerText = response[stockID][stock]["amount"] * response[stockID][stock]["price"];
 
                     const td5 = document.createElement("td");
 
@@ -268,6 +270,7 @@ function populatePortfolios() {
                     buttonDiv.setAttribute("class", "dropdown");
 
                     const button = document.createElement("button");
+                    
                     button.setAttribute("class", "btn btn-danger btn-rounded dropbtn");
                     button.setAttribute("data-toggle", "tooltip");
                     button.setAttribute("title", "Delete stock");
@@ -282,11 +285,10 @@ function populatePortfolios() {
                                 method: "GET"
                             }).then(resp => resp.json())
                             .then(function (response) {
-                                document.getElementById("Portfolios").click();
-                                // while(document.getElementById(item) == null){
-                                //     //donothing
-                                // }
-                                document.getElementById(item).click();
+                                button.parentElement.parentElement.parentElement.parentElement.removeChild(button.parentElement.parentElement.parentElement);
+                                // document.getElementById("Portfolios").click();
+                                
+                                // document.getElementById(item).click();
                             })
                     });
 

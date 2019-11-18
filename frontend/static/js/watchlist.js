@@ -135,7 +135,12 @@ function watchlist() {
                 tr.style.backgroundColor = "";
             });
 
-            tr.addEventListener("click", function (event) {
+            td1.addEventListener("click", function (event) {
+                const children = tr.childNodes;
+                stockData(children[0].textContent || children[0].innerText || "");
+            });
+
+            td2.addEventListener("click", function (event) {
                 const children = tr.childNodes;
                 stockData(children[0].textContent || children[0].innerText || "");
             });
@@ -161,8 +166,9 @@ function removeFromwatchlist(stockCode) {
     fetch(apiUrl+"/remove_watchlist_stock/" + stockCode,{
         method:"GET"
     })
-    .then(resp=>resp.json())
-    .then(watchlist());
+    .then(()=>{
+        document.getElementById("Watchlist").click();
+    });
     
     // watchlist();
     //console.log(stockCode);
