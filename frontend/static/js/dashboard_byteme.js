@@ -694,6 +694,9 @@ search();
 loadProfile();
 logout();
 
+
+document.getElementById("swagat").innerText = "Welcome, " + sessionStorage.getItem("name");
+
 export {
     initChart,
     drawChart

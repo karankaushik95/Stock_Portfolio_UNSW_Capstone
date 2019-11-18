@@ -91,6 +91,7 @@ function populatePortfolios() {
 
         tr.setAttribute("data-toggle", "modal");
         tr.setAttribute("data-target", "#portfolioModal");
+        
         document.getElementById("createPortfolio").addEventListener("click", function (event) {
             event.preventDefault();
             const portfolioName = document.getElementById("portfolioName");
@@ -130,6 +131,10 @@ function populatePortfolios() {
         tr.appendChild(td1);
         tr.appendChild(td2);
         tbody.appendChild(tr);
+
+
+
+        
         for (var item in response) {
             const tr = document.createElement("tr");
 
@@ -258,11 +263,14 @@ function populatePortfolios() {
                     const td2 = document.createElement("td");
                     td2.innerText = response[stockID][stock]["amount"];
 
+                    total_stock += Number(response[stockID][stock]["amount"]);
+
                     const td3 = document.createElement("td");
                     td3.innerText = response[stockID][stock]["price"];
 
                     const td4 = document.createElement("td");
-                    td4.innerText = response[stockID][stock]["amount"] * response[stockID][stock]["price"];
+                    td4.innerText = Number(response[stockID][stock]["amount"]) * Number(response[stockID][stock]["price"]);
+                    total_price+=Number(response[stockID][stock]["amount"]) * Number(response[stockID][stock]["price"]);
 
                     const td5 = document.createElement("td");
 
@@ -308,7 +316,7 @@ function populatePortfolios() {
                 }
             });
 
-
+            
             tbody.appendChild(tr);
         }
     });
