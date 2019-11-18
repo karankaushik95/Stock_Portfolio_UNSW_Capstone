@@ -126,11 +126,11 @@ def create_portfolio():
             return Response(status="401")
     return render_template('create_portfolio.html')
 
-@app.route('/logout.html')
-def logout():
-    login_service.logout_session_user(current_user)
-    logout_user()
-    return redirect(url_for('index'))
+# @app.route('/logout.html')
+# def logout():
+#     login_service.logout_session_user(current_user)
+#     logout_user()
+#     return redirect(url_for('index'))
 
 @app.route('/about.html')
 def about():

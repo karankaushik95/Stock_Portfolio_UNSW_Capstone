@@ -151,9 +151,16 @@ function search() {
 
                 button.innerText = "+";
 
-                buttonDiv.appendChild(button);
-
                 const dropdowndiv = document.createElement("div");
+                
+                const test = document.createElement("a");
+                test.innerText = "Test";
+                test.setAttribute("href", "#");
+                dropdowndiv.setAttribute("class", "dropdown-content");
+                dropdowndiv.appendChild(test);
+                buttonDiv.appendChild(button);
+                buttonDiv.appendChild(dropdowndiv);
+                
 
 
 
@@ -182,7 +189,7 @@ function search() {
                     tr.style.backgroundColor = "";
                 });
 
-                tr.addEventListener("click", function (event) {
+                td1.addEventListener("click", function (event) {
                     if (event.target.className.trim()) {
                         return;
                     }
