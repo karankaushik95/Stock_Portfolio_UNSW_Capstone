@@ -37,6 +37,22 @@ def populate_stock_price_db():
     query = sql.format('GOOGL', str(1333.54))
     cursor.execute(query)
 
+    sql = """ INSERT INTO price (id, ticker, price) VALUES (NULL, "{}", "{}");"""
+    query = sql.format('PYPL', str(104.26))
+    cursor.execute(query)
+
+    sql = """ INSERT INTO price (id, ticker, price) VALUES (NULL, "{}", "{}");"""
+    query = sql.format('NFLX', str(295.03))
+    cursor.execute(query)
+
+    sql = """ INSERT INTO price (id, ticker, price) VALUES (NULL, "{}", "{}");"""
+    query = sql.format('CMCSA', str(44.56))
+    cursor.execute(query)
+
+    sql = """ INSERT INTO price (id, ticker, price) VALUES (NULL, "{}", "{}");"""
+    query = sql.format('BRK-A', str(329405.00))
+    cursor.execute(query)
+
     connection.commit()
     connection.close()
 
