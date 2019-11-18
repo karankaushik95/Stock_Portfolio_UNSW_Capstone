@@ -23,9 +23,9 @@ function watchlist() {
         const div2 = document.createElement("div");
         div2.setAttribute("class", "col-12 py-5");
 
-        // const heading = document.createElement("h4");
-        // heading.innerText = "Search for \"" + searchTerm + "\" yielded the following results:";
-        // heading.setAttribute("class", "animate-bottom");
+        const heading = document.createElement("h4");
+        heading.innerText = "Your Watchlist";
+        heading.setAttribute("class", "animate-bottom");
 
         const div3 = document.createElement("div");
         div3.setAttribute("class", "item-wrapper");
@@ -52,7 +52,7 @@ function watchlist() {
         const tbody = document.createElement("tbody");
 
         div1.appendChild(div2);
-
+        div2.appendChild(heading);
         div3.appendChild(div4);
         div4.appendChild(table);
 
