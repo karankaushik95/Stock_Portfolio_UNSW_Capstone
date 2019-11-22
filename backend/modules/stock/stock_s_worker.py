@@ -25,5 +25,9 @@ class stockSWorker():
             url = app.config["AV_URL"] + "TIME_SERIES_{}&symbol={}" + app.config["AV_TOKEN"]
             url = url.format(series, ticker)
         data = requests.get(url)
-        json_data = json.loads(data.text)
-        return json_data
+        print(data.text)
+        if data.text is None:
+            return None
+        else:
+            json_data = json.loads(data.text)
+            return json_data
