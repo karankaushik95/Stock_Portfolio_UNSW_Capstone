@@ -12,6 +12,7 @@ const register_big_button = document.getElementById("register_big_button");
 
 register_big_button.style.color = "white";
 
+//Just two functions for the background of the buttons to change on hover
 
 register_big_button.addEventListener("mouseleave", function (event) {
     event.target.style.color = "white";
@@ -21,6 +22,7 @@ register_big_button.addEventListener("mouseenter", function (event) {
     event.target.style.color = "#0079D3";
 });
 
+// Following 4 functions describe what happens when the buttons at the top at the menu are clicked
 about.addEventListener("click", () => {
 
 
@@ -71,6 +73,8 @@ home.addEventListener("click", () => {
     home.className = "nav-item active";
 });
 
+// A scroll listener on the document to change the active item of the menu at the top of the page
+
 document.addEventListener("scroll", function (event) {
     if (document.documentElement.scrollTop < aboutScroll.top - 100) {
         about.className = "nav-item";
@@ -88,39 +92,7 @@ document.addEventListener("scroll", function (event) {
 });
 
 
-forgotPassword.addEventListener("click", () => {
-    document.getElementsByClassName("modal-backdrop fade show")[0].remove(); // Remove the backdrop that wasn't being removed with just the below line
-    $("#modalRequest").toggle();
-});
-
-document.getElementById("loginButton").addEventListener("click", function (event) {
-
-    event.preventDefault();
-
-});
-
-document.getElementById("forgotPassSubmit").addEventListener("click", function (event) {
-
-    event.preventDefault();
-    const forgotPasswordText = document.getElementById("forgotpwdemail");
-    const forgotPasswordSpan = document.getElementById("forgot_pwd_email_error");
-    forgotPasswordSpan.style.color = "red";
-    if (!forgotPasswordText.value.trim()) {
-        forgotPasswordSpan.innerText = "Email cannot be empty";
-        forgotPasswordText.focus();
-        forgotPasswordText.style.borderColor = "red";
-        return;
-    } else {
-        if (forgotPasswordText.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-            forgotPasswordSpan.innerText = "";
-            forgotPasswordText.style.borderColor = "";
-        } else {
-            forgotPasswordSpan.innerText = "Please enter a valid email";
-            forgotPasswordText.focus();
-            forgotPasswordText.style.borderColor = "red";
-        }
-    }
-});
+//Just a function that serves as a hyperlink reference upon button click
 
 document.getElementById("loginButton").addEventListener("click", function (event) {
 
@@ -129,6 +101,7 @@ document.getElementById("loginButton").addEventListener("click", function (event
 
 });
 
+//Just a function that serves as a hyperlink reference upon button click
 document.getElementById("registerButton").addEventListener("click", function (event) {
     
     event.preventDefault();

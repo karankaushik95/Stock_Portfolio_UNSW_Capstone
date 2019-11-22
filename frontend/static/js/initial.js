@@ -1,3 +1,5 @@
+
+// This function just sets up the initial values of the username and full name of the user on the dashboard below the image
 function getUserData(){
     fetch("http://127.0.0.1:5000/user_data", {
         method: 'GET'

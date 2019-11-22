@@ -2,6 +2,7 @@ const apiUrl = "http://127.0.0.1:5000";
 
 import {initChart, drawChart} from './dashboard_byteme.js';
 
+// Initializes the watchlist of the user
 function watchlist() {
 
     const clearUI = document.getElementById("dashboard_heading");

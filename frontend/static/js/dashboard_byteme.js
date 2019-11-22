@@ -6,7 +6,7 @@ const apiUrl = "http://127.0.0.1:5000"
 
 
 
-
+// Safely logs out the user from the application
 function logout() {
     document.getElementById("Logout").addEventListener("click", function (event) {
         fetch(apiUrl + "/logout", {
@@ -18,6 +18,7 @@ function logout() {
     });
 }
 
+// When the user clicks on search, it will contact the search API and initialize the search results
 function search() {
 
     const searchButton = document.getElementById("search_button");
@@ -403,30 +404,6 @@ function search() {
                         a4.innerText = "1 month";
                         li4.appendChild(a4);
 
-                        // const li5 = document.createElement("li");
-                        // li5.setAttribute("class", "nav-item");
-                        // const a5 = document.createElement("a");
-                        // a5.setAttribute("href", "#");
-                        // a5.setAttribute("class", "nav-link");
-                        // a5.innerText = "YTD";
-                        // li5.appendChild(a5);
-
-                        // const li6 = document.createElement("li");
-                        // li6.setAttribute("class", "nav-item");
-                        // const a6 = document.createElement("a");
-                        // a6.setAttribute("href", "#");
-                        // a6.setAttribute("class", "nav-link");
-                        // a6.innerText = "1 year";
-                        // li6.appendChild(a6);
-
-                        // const li7 = document.createElement("li");
-                        // li7.setAttribute("class", "nav-item");
-                        // const a7 = document.createElement("a");
-                        // a7.setAttribute("href", "#");
-                        // a7.setAttribute("class", "nav-link");
-                        // a7.innerText = "5 years";
-                        // li7.appendChild(a7);
-
                         const li8 = document.createElement("li");
                         li8.setAttribute("class", "nav-item");
                         li8.setAttribute("id", "max-time");
@@ -610,6 +587,7 @@ function search() {
     });
 }
 
+//Initializes the chart
 function initChart(data, graph) {
 
     var options = {
@@ -643,7 +621,7 @@ function initChart(data, graph) {
     return new Chart(ctx, options);
 
 }
-
+//Draws the chart for the timeseries
 function drawChart(data, myChart) {
 
     myChart.destroy();
@@ -678,7 +656,7 @@ function drawChart(data, myChart) {
     return myChart;
 }
 
-
+// Loads the profile of the user
 function loadProfile() {
 
     document.getElementById("profile").addEventListener("click", () => {

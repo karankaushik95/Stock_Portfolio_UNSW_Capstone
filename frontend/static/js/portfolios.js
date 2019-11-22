@@ -9,9 +9,10 @@ function portfolioListener() {
     });
 }
 
-
+// Populates all the users portfolios when the portfolio button on the dashboard is clicked
 function populatePortfolios() {
     const clearUI = document.getElementById("dashboard_heading");
+    // Clears the UI and puts a loader in to wait for the elements to load
     while (clearUI.firstChild) {
         clearUI.removeChild(clearUI.firstChild);
     }
@@ -22,7 +23,7 @@ function populatePortfolios() {
         method: 'GET',
     }).then(resp => resp.json()).then(function (response) {
         console.log(response);
-
+        //Remove the loader div and load the data
         loaderDiv.parentElement.removeChild(loaderDiv);
 
         const div1 = document.createElement("div");
@@ -91,7 +92,7 @@ function populatePortfolios() {
 
         tr.setAttribute("data-toggle", "modal");
         tr.setAttribute("data-target", "#portfolioModal");
-        
+        // Actions when the create portfolio button is clicked
         document.getElementById("createPortfolio").addEventListener("click", function (event) {
             event.preventDefault();
             const portfolioName = document.getElementById("portfolioName");

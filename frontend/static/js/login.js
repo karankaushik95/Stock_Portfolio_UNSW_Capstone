@@ -8,9 +8,12 @@ const passwordSpan = document.getElementById("password_error");
 passwordSpan.style.color = "red";
 usernameSpan.style.color = "red";
 
+
+// Listens for a click on the login page 
 document.getElementById("login").addEventListener('click', function (event) {
 
     event.preventDefault();
+    //Checks if the password is empty
     if (!password.value.trim()) {
         passwordSpan.innerText = "Please enter your password";
         password.focus();
@@ -19,6 +22,7 @@ document.getElementById("login").addEventListener('click', function (event) {
         password.style.borderColor = "";
         passwordSpan.innerText = "";
     }
+    //Checks if the username is empty
     if (!username.value.trim()) {
         username.style.borderColor = "red";
         username.focus();
@@ -27,6 +31,7 @@ document.getElementById("login").addEventListener('click', function (event) {
         usernameSpan.innerText = "";
         username.style.borderColor = "";
     }
+    //If both conditions are passed then the API is called trying to login to the web app
     if (username.value.trim() && password.value.trim()) {
         let formData = new FormData();
         formData.append("username", username.value);
