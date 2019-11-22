@@ -33,3 +33,7 @@ Fixed some CSS errors, finished stock profile, connected login and register endp
 Week 9 (11/11/19)
 
 Fixed more design related issues, completed user profile, watchlist. Finished dashboard, fixed up all the other issues that were cropping up. Added buttons to add to watchlist and portfolios.
+
+Week 10 (18/11/19)
+
+Finish code and prepare for the presentation. Add comments to code and work on report with teammates
