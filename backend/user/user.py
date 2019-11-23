@@ -1,99 +1,75 @@
 from flask_login import UserMixin
 import sqlite3
-from time import gmtime, strftime
+from modules.portfolio.portfolio_s_worker import portfolioSWorker
+from modules.portfolio.portfolio_m_worker import portfolioMWorker
+from modules.watchlist.watchlist_s_worker import watchlistSWorker
+from modules.watchlist.watchlist_m_worker import watchlistMWorker
 
 
 class User(UserMixin):
 
     def __init__(self, user_id):
         self.email = user_id
-
-    def get_portfolio_names(self):
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        sql_command = """SELECT * FROM portfolio_names;"""
-        cursor.execute(sql_command)
-        rows = cursor.fetchall()
-        portfolio_names = []
-        for row in rows:
-            portfolio_names.append(row[1])
-        connection.close()
-        return portfolio_names
-
-    def remove_portfolio_stock(self, ticker, portfolio_name):
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        sql_command = """DELETE FROM "{}" WHERE ticker = "{}";"""
-        sql_query = sql_command.format(portfolio_name, ticker)
-        cursor.execute(sql_query)
-        connection.commit()
-        connection.close()
-
-    def add_portfolio_stock(self, ticker, amount, portfolio_name):
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        sql_command = """INSERT INTO "{}" (id, ticker, amount, time_added) VALUES (NULL, "{}", "{}", "{}");"""
-        sql_query = sql_command.format(portfolio_name, ticker, amount, strftime("%Y-%m-%d %H:%M:%S", gmtime()))
-        cursor.execute(sql_query)
-        connection.commit()
-        connection.close()
+        self.ps_worker = portfolioSWorker()
+        self.pm_worker = portfolioMWorker()
+        self.ws_worker = watchlistSWorker()
+        self.wm_worker = watchlistMWorker()
 
     def remove_watchlist_stock(self, ticker):
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        sql_command = """DELETE FROM watchlist WHERE ticker = "{}";"""
-        sql_query = sql_command.format(ticker)
-        cursor.execute(sql_query)
-        connection.commit()
-        connection.close()
+        self.ws_worker.remove_watchlist_stock(self.email, ticker)
 
     def add_watchlist_stock(self, ticker):
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        sql_command = """INSERT INTO watchlist (id, ticker, time_added) VALUES (NULL, "{}", "{}");"""
-        sql_query = sql_command.format(ticker, strftime("%Y-%m-%d %H:%M:%S", gmtime()))
-        cursor.execute(sql_query)
-        connection.commit()
-        connection.close()
-
-    def delete_portfolio(self, portfolio_name):
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        sql_command = """DELETE FROM portfolio_names WHERE name = "{}";"""
-        sql_query = sql_command.format(portfolio_name)
-        cursor.execute(sql_query)
-
-        sql_command = """DROP TABLE "{}";"""
-        sql_query = sql_command.format(portfolio_name)
-        cursor.execute(sql_query)
-        connection.commit()
-        connection.close()
-
-    def create_portfolio(self, portfolio_name):
-        portfolio_names = self.get_portfolio_names()
-        if portfolio_name in portfolio_names or portfolio_name == "watchlist":
+        sql_data = self.ws_worker.get_watchlist(self.email)
+        watchlist_data = self.wm_worker.create_watchlist_stock_list(sql_data)
+        stock_flag = self.wm_worker.check_watchlist_stock(ticker, watchlist_data)
+        if stock_flag:
+            self.ws_worker.add_watchlist_stock(self.email, ticker)
+            return True
+        else:
             return False
 
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        sql_command = """INSERT INTO portfolio_names (name) VALUES ("{}");"""
-        sql_query = sql_command.format(portfolio_name)
-        cursor.execute(sql_query)
+    def get_watchlist(self):
+        sql_data = self.ws_worker.get_watchlist(self.email)
+        watchlist_data = self.wm_worker.create_watchlist_json(sql_data)
+        return watchlist_data
 
-        sql_command = """CREATE TABLE if not exists "{}" (id INTEGER PRIMARY KEY, ticker VARCHAR(20), amount INTEGER,
-                      time_added TEXT);"""
-        sql_query = sql_command.format(portfolio_name)
-        cursor.execute(sql_query)
-        connection.commit()
-        connection.close()
-        return True
+    def get_portfolio_names(self):
+        sql_data = self.ps_worker.get_portfolio_names(self.email)
+        portfolio_data = self.pm_worker.create_portfolios_list(sql_data)
+        return portfolio_data
+
+    def remove_portfolio_stock(self, ticker, portfolio_name):
+        self.ps_worker.remove_portfolio_stock(self.email, ticker, portfolio_name)
+
+    def add_portfolio_stock(self, ticker, amount, portfolio_name):
+        sql_data = ps_worker.get_portfolio(self.email, portfolio_name)
+        portfolio_data = self.pm_worker.create_portfolio_stock_list(sql_data)
+        stock_flag = self.pm_check_portfolio_stock(ticker, portfolio_data)
+        if stock_flag:
+            self.ps_worker.add_portfolio_stock(self.email, ticker, amount, portfolio_name)
+            return True
+        else:
+            self.ps_worker.update_portfolio_stock(self.email, ticker, amount, portfolio_name)
+            return False
+
+    def delete_portfolio(self, portfolio_name):
+        self.ps_worker.delete_portfolio(self.email, portfolio_name)
+
+    def create_portfolio(self, portfolio_name):
+        sql_data = self.ps_worker.get_portfolio_names(self.email)
+        portfolio_data = self.pm_worker.create_portfolios_list(sql_data)
+        name_flag = self.pm_worker.check_portfolio_names(portfolio_name, portfolio_data)
+        if name_flag:
+            self.ps_worker.create_portfolio(self.email, portfolio_name)
+            return True
+        else:
+            return False
+
+    def get_portfolios(self):
+        sql_data = self.ps_worker.get_portfolio_names(self.email)
+        portfolio_data = self.pm_worker.create_portfolios_list(sql_data)
+        portfolios = self.ps_worker.create_portfolio_json(self.email, portfolio_data)
+        return portfolios
 
     def get_details(self):
         connection = sqlite3.connect('db/users.db')
@@ -106,56 +82,6 @@ class User(UserMixin):
         user_data["name"] = rows[0][0]
         user_data["email"] = rows[0][1]
         return user_data
-
-    def get_portfolios(self):
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        portfolio_names = self.get_portfolio_names()
-        portfolios = {}
-
-        conn = sqlite3.connect('db/stock_price.db')
-        curs = conn.cursor()
-
-        for portfolio in portfolio_names:
-            sql_command = """ SELECT * FROM "{}";"""
-            sql_query = sql_command.format(portfolio)
-            cursor.execute(sql_query)
-            rows = cursor.fetchall()
-            print(rows)
-            portfolio_data = {}
-            for row in rows:
-                print(row)
-                row_data = {}
-                row_data["ticker"] = row[1]
-                com = """ SELECT price FROM price WHERE ticker="{}";"""
-                query = com.format(row[1])
-                curs.execute(query)
-                res = curs.fetchall()
-                if res:
-                    row_data["price"] = res[0][0]
-                else:
-                    row_data["price"] = str(0)
-                row_data["amount"] = row[2]
-                row_data["time_added"] = row[3]
-                portfolio_data[str(row[0])] = row_data
-            portfolios[str(portfolio)] = portfolio_data
-        return portfolios
-
-    def get_watchlist(self):
-        db_name = 'db/users/' + str(self.email)
-        connection = sqlite3.connect(db_name)
-        cursor = connection.cursor()
-        sql_command = """ SELECT * FROM watchlist;"""
-        cursor.execute(sql_command)
-        rows = cursor.fetchall()
-        watchlist_data = {}
-        for row in rows:
-            row_data = {}
-            row_data["ticker"] = row[1]
-            row_data["time_added"] = row[2]
-            watchlist_data[str(row[0])] = row_data
-        return watchlist_data
 
     def is_authenticated(self):
         return True

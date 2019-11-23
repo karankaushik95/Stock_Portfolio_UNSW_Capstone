@@ -1,14 +1,17 @@
 # We will use this for bootstrapping
-from os import path
+import os
 import sys
 
 
 def bootstrap():
-    if not path.exists('db/tickers.db'):
-        print("The file tickers.db does not exist. System exiting.", file=sys.stderr)
+    if not os.path.exists('db/users.db'):
+        print("The file db/users.db does not exist.", file=sys.stderr)
+        print("Run db/user_setup.py before running the server.", file=sys.stderr)
+        print("System exiting.", file=sys.stderr)
+        sys.exit(1)
 
-    if not path.exists('db/stock.db'):
-        print("The file stock.db does not exist. System exiting.", file=sys.stderr)
-
-    if not path.exists('db/users.db'):
-        print("The file users.db does not exist. System exiting.", file=sys.stderr)
+    if not os.path.exists('db/users'):
+        print("The folder db/users does not exist.", file=sys.stderr)
+        print("Create the folder before running the server.", file=sys.stderr)
+        print("System exiting.", file=sys.stderr)
+        sys.exit(1)
