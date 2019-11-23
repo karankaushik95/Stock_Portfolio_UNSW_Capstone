@@ -188,22 +188,12 @@ function search() {
 
                 button.innerText = "+";
 
-
-                // const dropdowndiv = document.createElement("div");
-
-                // const test = document.createElement("a");
-                // test.innerText = "Test";
-                // test.style.textAlign ="left";
-                // test.setAttribute("href", "#");
-                // dropdowndiv.setAttribute("class", "dropdown-content");
-                // dropdowndiv.appendChild(test);
                 buttonDiv.appendChild(button);
                 button.setAttribute("data-toggle", "modal");
                 button.setAttribute("data-target", "#addModal");
 
                 button.addEventListener("click", () => {
                     document.getElementById("quantity_error").innerText = "";
-                    //console.log(no_of_portfolios);
                     const children = tr.childNodes;
                     const stockID = children[1].textContent || children[1].innerText || "";
 
@@ -213,17 +203,8 @@ function search() {
                     addButton.addEventListener("click", function (event) {
 
                         event.preventDefault();
-                        wrong:
+                       
                             if (dropdown.value === "Watchlist") {
-                                for (var item in wishlist) {
-                                    if (wishlist[item]["ticker"] === stockID) {
-                                        document.getElementById("quantity_error").focus();
-                                        document.getElementById("quantity_error").innerText = "Already exists in selected option";
-                                        document.getElementById("quantity_error").style.color = "red";
-                                        break wrong;
-                                    }
-
-                                }
 
                                 document.getElementById("quantity_error").innerText = "";
                                 fetch(apiUrl + "/add_watchlist_stock/" + stockID, {
@@ -255,11 +236,6 @@ function search() {
                     });
 
                 });
-                // buttonDiv.appendChild(dropdowndiv);
-
-
-
-
 
 
                 td5.appendChild(buttonDiv);
@@ -292,9 +268,6 @@ function search() {
                     const children = tr.childNodes;
                     const stockID = children[1].textContent || children[1].innerText || "";
                     const clearUI = document.getElementById("dashboard_heading");
-                    // while (clearUI.firstChild) {
-                    //     clearUI.removeChild(clearUI.firstChild);
-                    // }
                     div1.style.display = "none";
                     div3.style.display = "none";
                     const loaderDiv = document.createElement("div");
@@ -418,12 +391,8 @@ function search() {
                         menu.appendChild(li2);
                         menu.appendChild(li3);
                         menu.appendChild(li4);
-                        // menu.appendChild(li5);
-                        // menu.appendChild(li6);
-                        // menu.appendChild(li7);
                         menu.appendChild(li8);
 
-                        // navDiv.appendChild(menu);
 
                         navbar.appendChild(menu);
 
@@ -550,7 +519,6 @@ function search() {
                         contentDiv.appendChild(document.createElement("br"));
 
                         const lastDiv = document.createElement("div");
-                        //console.log(stockInfo);
                         const p1 = document.createElement("p");
                         p1.innerText = "Open: \t" + stockInfo["Global Quote"]["02. open"];
 

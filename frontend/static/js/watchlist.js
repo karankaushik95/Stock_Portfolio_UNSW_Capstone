@@ -69,9 +69,7 @@ function watchlist() {
         clearUI.appendChild(div1);
         clearUI.appendChild(div3);
 
-        // console.log(response);
         for (var item in response) {
-            // console.log(response[item]);
             const tr = document.createElement("tr");
 
             const td1 = document.createElement("td");
@@ -83,10 +81,7 @@ function watchlist() {
             const td3 = document.createElement("td");
             td3.style.cursor = "pointer";
 
-            // const td4 = document.createElement("td");
-            // td4.style.cursor = "pointer";
 
-            // const td5 = document.createElement("td");
 
 
             const buttonDiv = document.createElement("div");
@@ -171,8 +166,6 @@ function removeFromwatchlist(stockCode) {
         document.getElementById("Watchlist").click();
     });
     
-    // watchlist();
-    //console.log(stockCode);
 }
 
 function stockData(stockID) {
@@ -188,7 +181,6 @@ function stockData(stockID) {
     fetch(apiUrl + "/stock/" + stockID, {
         method: 'GET',
     }).then(sresp => sresp.json()).then(function (stockInfo) {
-        console.log(stockInfo);
 
 
         loaderDiv.parentElement.removeChild(loaderDiv);
@@ -224,14 +216,11 @@ function stockData(stockID) {
         const stockName = document.createElement("h3");
         stockName.innerText = stockInfo["Global Quote"]["01. symbol"]
 
-        // const stockSymbol = document.createElement("p");
-        // stockSymbol.innerText = children[1].textContent || children[1].innerText || "";
 
         const currentPrice = document.createElement("h5");
         currentPrice.innerText = stockInfo["Global Quote"]["05. price"] + " USD";
 
         contentDiv.appendChild(stockName);
-        // contentDiv.appendChild(stockSymbol);
         contentDiv.appendChild(currentPrice);
         contentDiv.setAttribute("class", "animate-bottom");
 
@@ -286,30 +275,6 @@ function stockData(stockID) {
         a4.innerText = "1 month";
         li4.appendChild(a4);
 
-        // const li5 = document.createElement("li");
-        // li5.setAttribute("class", "nav-item");
-        // const a5 = document.createElement("a");
-        // a5.setAttribute("href", "#");
-        // a5.setAttribute("class", "nav-link");
-        // a5.innerText = "YTD";
-        // li5.appendChild(a5);
-
-        // const li6 = document.createElement("li");
-        // li6.setAttribute("class", "nav-item");
-        // const a6 = document.createElement("a");
-        // a6.setAttribute("href", "#");
-        // a6.setAttribute("class", "nav-link");
-        // a6.innerText = "1 year";
-        // li6.appendChild(a6);
-
-        // const li7 = document.createElement("li");
-        // li7.setAttribute("class", "nav-item");
-        // const a7 = document.createElement("a");
-        // a7.setAttribute("href", "#");
-        // a7.setAttribute("class", "nav-link");
-        // a7.innerText = "5 years";
-        // li7.appendChild(a7);
-
         const li8 = document.createElement("li");
         li8.setAttribute("class", "nav-item");
         li8.setAttribute("id", "max-time");
@@ -324,12 +289,7 @@ function stockData(stockID) {
         menu.appendChild(li2);
         menu.appendChild(li3);
         menu.appendChild(li4);
-        // menu.appendChild(li5);
-        // menu.appendChild(li6);
-        // menu.appendChild(li7);
         menu.appendChild(li8);
-
-        // navDiv.appendChild(menu);
 
         navbar.appendChild(menu);
 
@@ -456,7 +416,6 @@ function stockData(stockID) {
         contentDiv.appendChild(document.createElement("br"));
 
         const lastDiv = document.createElement("div");
-        //console.log(stockInfo);
         const p1 = document.createElement("p");
         p1.innerText = "Open: \t" + stockInfo["Global Quote"]["02. open"];
 
