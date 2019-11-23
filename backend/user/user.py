@@ -68,7 +68,7 @@ class User(UserMixin):
     def get_portfolios(self):
         sql_data = self.ps_worker.get_portfolio_names(self.email)
         portfolio_data = self.pm_worker.create_portfolios_list(sql_data)
-        portfolios = self.ps_worker.create_portfolio_json(self.email, portfolio_data)
+        portfolios = self.pm_worker.create_portfolio_json(self.email, portfolio_data)
         return portfolios
 
     def get_details(self):
