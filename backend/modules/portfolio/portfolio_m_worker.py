@@ -34,7 +34,6 @@ class portfolioMWorker():
             rows = ps_worker.get_portfolio(email, portfolio)
             portfolio_data = {}
             for row in rows:
-                print(row)
                 row_data = {}
                 row_data["ticker"] = row[1]
                 row_data["price"] = str(0)
@@ -42,3 +41,4 @@ class portfolioMWorker():
                 row_data["time_added"] = row[3]
                 portfolio_data[str(row[0])] = row_data
             portfolios[str(portfolio)] = portfolio_data
+        return portfolios

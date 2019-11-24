@@ -21,7 +21,7 @@ class LoginService():
 
     def login_session_user(self, user):
         self.session_users.append(user)
-        
+
     def logout_session_user(self, user):
         self.session_users.remove(user)
 
@@ -40,14 +40,13 @@ class LoginService():
 
         # Note the length of emails will be the same as passwords, ie: the number of users
         for i in range(len(emails)):
-            print(emails[i][0], passwords[i][0])
+            # print(emails[i][0], passwords[i][0])
             if email == emails[i][0]:
                 if password == passwords[i][0]:
                     return True
         return False
 
     def new_user(self, name, email, password):
-        print("Creating new user: ", email, password)
         connection = sqlite3.connect('db/users.db')
         cursor = connection.cursor()
         sql = """ INSERT INTO users VALUES ("{}", "{}", "{}");"""
