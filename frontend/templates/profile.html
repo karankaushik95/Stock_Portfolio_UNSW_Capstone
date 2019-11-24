@@ -83,7 +83,7 @@
                     window.location.href = "/dashboard.html";
                 } else {
                     let formData = new FormData();
-                    formData.append("password", password.value);
+                    formData.append("profile-password", password.value);
                     fetch("http://127.0.0.1:5000/changepassword", {
                             method: "POST",
                             body: formData
