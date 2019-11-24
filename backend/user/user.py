@@ -82,6 +82,14 @@ class User(UserMixin):
         user_data["name"] = rows[0][0]
         user_data["email"] = rows[0][1]
         return user_data
+    
+    def update_password(self, new_pass):
+        connection = sqlite3.connect('db/users.db')
+        cursor = connection.cursor()
+        sql_command = """ UPDATE users SET password = "{}" WHERE email = "{}";"""
+        sql_query = sql_command.format(str(new_pass), str(self.email))
+        cursor.execute(sql_query)
+        connection.close()
 
     def is_authenticated(self):
         return True

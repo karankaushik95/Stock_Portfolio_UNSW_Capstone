@@ -31,6 +31,14 @@ def login():
             return Response(status="401")   
     return render_template('login.html')
 
+@app.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    if request.method == 'POST':
+        new_pass = request.form['password']
+        current_user.update_password(new_pass)
+    return redirect(url_for('profile'))
+    
 
 @app.route('/logout')
 def logout():
