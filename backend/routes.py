@@ -136,6 +136,11 @@ def create_portfolio():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/profile.html')
+@login_required
+def profile():
+    return render_template('profile.html')    
+
 
 # SHARE PROFILE ROUTE NO HTML YET
 # USES APLHAVANTAGE

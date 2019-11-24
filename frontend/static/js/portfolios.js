@@ -104,7 +104,7 @@ function populatePortfolios() {
                 portfolioName.style.borderColor = "red";
                 return;
             } else {
-                if (response[portfolioName.value]) {
+                if (response && response[portfolioName.value]) {
                     portfolioError.innerText = "Portfolio with this name already exists";
                     portfolioName.focus();
                     portfolioName.style.borderColor = "red";
