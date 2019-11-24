@@ -23,7 +23,6 @@ def login():
         email = request.form['username']
         passwd = request.form['password']
         if login_service.check(email, passwd):
-            print('here')
             user = User(email)
             login_service.login_session_user(user)
             login_user(user)
@@ -131,47 +130,6 @@ def create_portfolio():
 #     login_service.logout_session_user(current_user)
 #     logout_user()
 #     return redirect(url_for('index'))
-
-@app.route('/about.html')
-def about():
-    return render_template('about.html')
-
-
-@app.route('/blog-single.html')
-def blog_single():
-    return render_template('blog-single.html')
-
-
-@app.route('/blog.html')
-def blog():
-    return render_template('blog.html')
-
-
-@app.route('/contact.html')
-def contact():
-    return render_template('contact.html')
-
-
-@app.route('/pricing.html')
-def pricing():
-    return render_template('pricing.html')
-
-
-@app.route('/services.html')
-def services():
-    return render_template('services.html')
-
-
-@app.route('/team.html')
-def team():
-    return render_template('team.html')
-
-
-@app.route('/profile.html')
-@login_required
-def work():
-    return render_template('profile.html')
-
 
 @app.route('/dashboard.html')
 @login_required

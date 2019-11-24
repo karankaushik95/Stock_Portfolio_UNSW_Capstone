@@ -38,8 +38,13 @@ class portfolioSWorker():
         db_name = 'db/users/' + str(email)
         connection = sqlite3.connect(db_name)
         cursor = connection.cursor()
-        sql_command = """UPDATE "{}" (id, ticker, amount, time_added) SET amount = "{}" WHERE ticker = "{}";"""
-        sql_query = sql_command.format(portfolio_name, amount, ticker)
+        sql_command = """SELECT amount FROM "{}" WHERE ticker = "{}";"""
+        sql_query = sql_command.format(portfolio_name, ticker)
+        cursor.execute(sql_query)
+        amount_raw = cursor.fetchall()
+        amount_prev = int(amount_raw[0][0])
+        sql_command = """UPDATE "{}" SET amount = "{}" WHERE ticker = "{}";"""
+        sql_query = sql_command.format(portfolio_name, int(amount) + amount_prev, ticker)
         cursor.execute(sql_query)
         connection.commit()
         connection.close()

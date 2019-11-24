@@ -42,9 +42,9 @@ class User(UserMixin):
         self.ps_worker.remove_portfolio_stock(self.email, ticker, portfolio_name)
 
     def add_portfolio_stock(self, ticker, amount, portfolio_name):
-        sql_data = ps_worker.get_portfolio(self.email, portfolio_name)
+        sql_data = self.ps_worker.get_portfolio(self.email, portfolio_name)
         portfolio_data = self.pm_worker.create_portfolio_stock_list(sql_data)
-        stock_flag = self.pm_check_portfolio_stock(ticker, portfolio_data)
+        stock_flag = self.pm_worker.check_portfolio_stock(ticker, portfolio_data)
         if stock_flag:
             self.ps_worker.add_portfolio_stock(self.email, ticker, amount, portfolio_name)
             return True
