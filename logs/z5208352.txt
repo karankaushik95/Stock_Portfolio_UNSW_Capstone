@@ -31,3 +31,13 @@ Week 8
 Adapted the login service to the front end. Initially it was set up such that the login and signup forms were on their own html page, however now they are forms accessible from the dashboard. As I am unfamiliar with html and writing corresponding wrotes this required assistance from other members in the group.
 
 Week 9
+
+During this week I wrote the routes for adding stocks to a portfolio or the watchlist. This meant writing logic in the backend, and connecting this to the route. The route needed to act on the user object to check whether there were existing stocks in the watchlist/portfolio accordingly. This presented a challenge for me as I am unfamiliar with SQLite and required an understanding of the database setup, which is quite foreign for me. Fortunately I was able to work through this without too much difficulty.
+
+Week 10
+
+This final week consisted of adding the finishing touches. I wrote the route to update a user's password which also meant accessing the database. This required communication with other team member's using the frontend to ensure it worked smothly.
+
+Week 11
+
+This week has been quite minimal as we submit the code on Tuesday. Merely discussing details with the group and making sure there are no glaring errors. Final error checking and testing.
