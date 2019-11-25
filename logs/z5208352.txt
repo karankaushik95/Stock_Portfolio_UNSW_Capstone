@@ -36,7 +36,7 @@ During this week I wrote the routes for adding stocks to a portfolio or the watc
 
 Week 10
 
-This final week consisted of adding the finishing touches. I wrote the route to update a user's password which also meant accessing the database. This required communication with other team member's using the frontend to ensure it worked smothly.
+This final week consisted of adding the finishing touches. I wrote the route to update a user's password which also meant accessing the database. This required communication with other team member's using the frontend to ensure it worked smothly. We also prepared the logistics for our presentation.
 
 Week 11
 
