@@ -13,5 +13,3 @@ rm -r sqlite
 
 unzip sqlite3.zip -d sqlite
 rm sqlite3.zip
-
-mkdir -p db
