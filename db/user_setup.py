@@ -1,8 +1,5 @@
 import sqlite3
-import requests
 import os
-import json
-
 
 def bootstrap_db():
     bootstrap_users_db()
