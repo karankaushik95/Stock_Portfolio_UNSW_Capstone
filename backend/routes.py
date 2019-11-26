@@ -36,6 +36,7 @@ def login():
 def change_password():
     if request.method == 'POST':
         new_pass = request.form['password']
+        print(request.form['password'])
         current_user.update_password(new_pass)
     return redirect(url_for('profile'))
     
