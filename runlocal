@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+
+rm -r db/users/
+rm db/users.db
+
+cd db/
+python3 user_setup.py
+cd ../
+
 mkdir -p env
 python3 -m venv env
 source env/bin/activate
@@ -7,10 +15,5 @@ pip -q install -r requirements.txt
 export PROJ_CONFIG="config/application-dev.cfg"
 export FLASK_APP="backend/server.py"
 export FLASK_DEBUG=1
-
-case "$1" in
-    -c) rm db/*.db
-    ;;
-esac
 
 flask run

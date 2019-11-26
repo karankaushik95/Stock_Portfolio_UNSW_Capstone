@@ -1,11 +1,12 @@
 import sqlite3
 import requests
-from os import path
+import os
 import json
 
 
 def bootstrap_db():
     bootstrap_users_db()
+    mk_user_dir()
     # populate_users_db()
 
 
@@ -16,6 +17,13 @@ def bootstrap_users_db():
     cursor.execute(sql_command)
     connection.commit()
     connection.close()
+
+
+def mk_user_dir():
+    if os.path.exists('users/'):
+        return
+    else:
+        os.mkdir('./users/')
 
 
 def populate_users_db():
