@@ -29,3 +29,17 @@ Week 7 (28/10/19)
 Wrote the endpoints for the stock and market profile pages, made sure that they were serving the correct files and data, switched over to using Alpha Vantage instead of IEX for the API endpoint, as it was not providing enough stock data, only a limited set of stocks.
 
 Week 8 (04/11/19)
+
+Wrote the endpoints for portfolio and watchlist data and created the necessary worker modules to get the data and serve to the front-end to be displayed.
+
+Week 9 (11/11/19)
+
+Continued to troubleshoot and develop the portfolio and watchlist backend modules. Touched up the stock and market data endpoints.
+
+Week 10 (18/11/19)
+
+Error fixing and wrapping up the project for the demonstration early week 10. Project mainly completed, just needed to ensure that every thing was in working order.
+
+Week 11 (25/11/19)
+
+Cleaned up errors and worked on the report to make everything fit together nicely and ensure no breaks in the system. Finalised the setup process.
