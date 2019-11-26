@@ -9,11 +9,11 @@ Once you have uncommented the relevant line, save the script, and exit. In the r
 
 ./sqlite3_setup
 
-This script will download the software required for SQLite to manage the database. It will create a folder to store all the requisite software tools. Then, move to the directory ‘db’ and run the file ‘setup_db.py’ to set up the databases for users.
+This script will download the software required for SQLite to manage the database. It will create a folder to store all the requisite software tools. Then, move to the directory ‘db’ and run the file ‘users_setup.py’ to set up the databases for users.
 
 cd db
 
-python3  setup_db.py
+python3  users_setup.py
 
 Come back to the top directory ‘/capstone-project-byte_me’ and run the script ‘runlocal’.
 
