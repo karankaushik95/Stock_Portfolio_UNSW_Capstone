@@ -89,6 +89,7 @@ class User(UserMixin):
         sql_command = """ UPDATE users SET password = "{}" WHERE email = "{}";"""
         sql_query = sql_command.format(str(new_pass), str(self.email))
         cursor.execute(sql_query)
+        connection.commit()
         connection.close()
 
     def is_authenticated(self):

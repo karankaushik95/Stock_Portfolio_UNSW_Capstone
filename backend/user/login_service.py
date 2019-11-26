@@ -71,6 +71,6 @@ class LoginService():
 
     def get_user(self, email):
         for user in self.session_users:
-            if (user.email == email):
+            if (user.get_id() == email):
                 return user
         return None

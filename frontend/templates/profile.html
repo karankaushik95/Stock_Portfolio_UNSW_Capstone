@@ -75,16 +75,15 @@
         });
 
         function changePassword() {
-            const password = document.getElementById("save");
-            password.addEventListener("click", function (event) {
+            document.getElementById("profile-password").addEventListener("click", function (event) {
                 event.preventDefault();
                 const newPass = document.getElementById("profile-password").value.trim();
                 if (!newPass) {
                     window.location.href = "/dashboard.html";
                 } else {
                     let formData = new FormData();
-                    formData.append("profile-password", password.value);
-                    fetch("http://127.0.0.1:5000/changepassword", {
+                    formData.append("profile-password", newPass.value);
+                    fetch("http://127.0.0.1:5000/change_password", {
                             method: "POST",
                             body: formData
                         }).then(resp => resp.json())
