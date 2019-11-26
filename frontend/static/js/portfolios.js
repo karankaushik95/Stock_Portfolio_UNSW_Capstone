@@ -96,6 +96,7 @@ function populatePortfolios() {
         document.getElementById("createPortfolio").addEventListener("click", function (event) {
             event.preventDefault();
             const portfolioName = document.getElementById("portfolioName");
+            portfolioName.innerText = "";
             const portfolioError = document.getElementById("portfolio_error");
 
             if (!portfolioName.value.trim()) {
@@ -222,11 +223,11 @@ function populatePortfolios() {
                 const th2 = document.createElement("th");
                 th2.innerText = "Quantity";
 
-                const th3 = document.createElement("th");
-                th3.innerText = "Unit Price";
+                // const th3 = document.createElement("th");
+                // th3.innerText = "Unit Price";
 
-                const th4 = document.createElement("th");
-                th4.innerText = "Total Price";
+                // const th4 = document.createElement("th");
+                // th4.innerText = "Total Price";
 
                 const th5 = document.createElement("th");
 
@@ -243,8 +244,8 @@ function populatePortfolios() {
 
                 tr1.appendChild(th1);
                 tr1.appendChild(th2);
-                tr1.appendChild(th3);
-                tr1.appendChild(th4);
+                // tr1.appendChild(th3);
+                // tr1.appendChild(th4);
                 tr1.appendChild(th5);
 
                 table.appendChild(tbody);
@@ -266,12 +267,12 @@ function populatePortfolios() {
 
                     total_stock += Number(response[stockID][stock]["amount"]);
 
-                    const td3 = document.createElement("td");
-                    td3.innerText = response[stockID][stock]["price"];
+                    // const td3 = document.createElement("td");
+                    // td3.innerText = response[stockID][stock]["price"];
 
-                    const td4 = document.createElement("td");
-                    td4.innerText = Number(response[stockID][stock]["amount"]) * Number(response[stockID][stock]["price"]);
-                    total_price+=Number(response[stockID][stock]["amount"]) * Number(response[stockID][stock]["price"]);
+                    // const td4 = document.createElement("td");
+                    // td4.innerText = Number(response[stockID][stock]["amount"]) * Number(response[stockID][stock]["price"]);
+                    // total_price+=Number(response[stockID][stock]["amount"]) * Number(response[stockID][stock]["price"]);
 
                     const td5 = document.createElement("td");
 
@@ -309,8 +310,8 @@ function populatePortfolios() {
 
                     tr.appendChild(td1);
                     tr.appendChild(td2);
-                    tr.appendChild(td3);
-                    tr.appendChild(td4);
+                    // tr.appendChild(td3);
+                    // tr.appendChild(td4);
                     tr.appendChild(td5);
 
                     tbody.appendChild(tr);

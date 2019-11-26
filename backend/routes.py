@@ -36,8 +36,13 @@ def login():
 @login_required
 def change_password():
     if request.method == 'POST':
+<<<<<<< HEAD
         new_pass = request.form['profile-password']
         print("H: " + str(new_pass))
+=======
+        new_pass = request.form['password']
+        print(request.form['password'])
+>>>>>>> 6190e67b62bd11d9a9dd683406d389666d9c004f
         current_user.update_password(new_pass)
     return redirect(url_for('profile'))
 

@@ -82,14 +82,12 @@
                     window.location.href = "/dashboard.html";
                 } else {
                     let formData = new FormData();
-                    formData.append("profile-password", newPass.value);
+                    formData.append("password", newPass);
+                    console.log(newPass);
                     fetch("http://127.0.0.1:5000/change_password", {
                             method: "POST",
                             body: formData
-                        }).then(resp => resp.json())
-                        .then(response => {
-                            window.location.href = "/dashboard.html";
-                        });
+                        }).then(window.location.href = "/dashboard.html");
                 }
             });
         }
